@@ -1,17 +1,1418 @@
 Starting round 1
 Ante for this round: 10
 Betting round 1:
-Sue played a bad action of raise and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: bet Amount: 20
+ 
+Player: Joe Action Phase: Bet1 Action Name: call Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Name: Sue
+Hand Rank: 2 
+Five of Diamonds Queen of Diamonds King of Clubs King of Spades Ace of Spades 
+
+ 
+Name: Joe
+Hand Rank: 2 
+Two of Spades Four of Hearts Four of Clubs Five of Clubs Eight of Clubs 
+
+ 
+Betting round 2:
+Player: Sue Action Phase: Bet2 Action Name: call Amount: 0
+ 
+After Bet2, pot is 60
+ 
+Sue has a better hand and wins 60
+
+After round 1, player status: 
+ Name: Joe Dealer: True Money: 970
+ Name: Sue Dealer: False Money: 1030
+ 
+Starting round 2
+Ante for this round: 10
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 20
+ 
+Joe folded. Other player gets the pot of 20
+
+After round 2, player status: 
+ Name: Joe Dealer: False Money: 960
+ Name: Sue Dealer: True Money: 1040
+ 
+Starting round 3
+Ante for this round: 10
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
 Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
  
 After Bet1, pot is 20
  
 Sue folded. Other player gets the pot of 20
 
-After round 1, player status: 
- Name: Joe Dealer: True Money: 990
- Name: Sue Dealer: False Money: 1010
+After round 3, player status: 
+ Name: Joe Dealer: True Money: 970
+ Name: Sue Dealer: False Money: 1030
  
-Starting round 2
+Starting round 4
 Ante for this round: 10
 Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 20
+ 
+Joe folded. Other player gets the pot of 20
+
+After round 4, player status: 
+ Name: Joe Dealer: False Money: 960
+ Name: Sue Dealer: True Money: 1040
+ 
+Starting round 5
+Ante for this round: 10
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 20
+ 
+Sue folded. Other player gets the pot of 20
+
+After round 5, player status: 
+ Name: Joe Dealer: True Money: 970
+ Name: Sue Dealer: False Money: 1030
+ 
+Starting round 6
+Ante for this round: 10
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 20
+ 
+Joe folded. Other player gets the pot of 20
+
+After round 6, player status: 
+ Name: Joe Dealer: False Money: 960
+ Name: Sue Dealer: True Money: 1040
+ 
+Starting round 7
+Ante for this round: 10
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 20
+ 
+Sue folded. Other player gets the pot of 20
+
+After round 7, player status: 
+ Name: Joe Dealer: True Money: 970
+ Name: Sue Dealer: False Money: 1030
+ 
+Starting round 8
+Ante for this round: 10
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 20
+ 
+Joe folded. Other player gets the pot of 20
+
+After round 8, player status: 
+ Name: Joe Dealer: False Money: 960
+ Name: Sue Dealer: True Money: 1040
+ 
+Starting round 9
+Ante for this round: 10
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 20
+ 
+Sue folded. Other player gets the pot of 20
+
+After round 9, player status: 
+ Name: Joe Dealer: True Money: 970
+ Name: Sue Dealer: False Money: 1030
+ 
+Starting round 10
+Ante for this round: 10
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 20
+ 
+Joe folded. Other player gets the pot of 20
+
+After round 10, player status: 
+ Name: Joe Dealer: False Money: 960
+ Name: Sue Dealer: True Money: 1040
+ 
+Starting round 11
+Ante for this round: 10
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 20
+ 
+Sue folded. Other player gets the pot of 20
+
+After round 11, player status: 
+ Name: Joe Dealer: True Money: 970
+ Name: Sue Dealer: False Money: 1030
+ 
+Starting round 12
+Ante for this round: 10
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 20
+ 
+Joe folded. Other player gets the pot of 20
+
+After round 12, player status: 
+ Name: Joe Dealer: False Money: 960
+ Name: Sue Dealer: True Money: 1040
+ 
+Starting round 13
+Ante for this round: 10
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 20
+ 
+Sue folded. Other player gets the pot of 20
+
+After round 13, player status: 
+ Name: Joe Dealer: True Money: 970
+ Name: Sue Dealer: False Money: 1030
+ 
+Starting round 14
+Ante for this round: 10
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 20
+ 
+Joe folded. Other player gets the pot of 20
+
+After round 14, player status: 
+ Name: Joe Dealer: False Money: 960
+ Name: Sue Dealer: True Money: 1040
+ 
+Starting round 15
+Ante for this round: 10
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 20
+ 
+Sue folded. Other player gets the pot of 20
+
+After round 15, player status: 
+ Name: Joe Dealer: True Money: 970
+ Name: Sue Dealer: False Money: 1030
+ 
+Starting round 16
+Ante for this round: 10
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 20
+ 
+Joe folded. Other player gets the pot of 20
+
+After round 16, player status: 
+ Name: Joe Dealer: False Money: 960
+ Name: Sue Dealer: True Money: 1040
+ 
+Starting round 17
+Ante for this round: 10
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 20
+ 
+Sue folded. Other player gets the pot of 20
+
+After round 17, player status: 
+ Name: Joe Dealer: True Money: 970
+ Name: Sue Dealer: False Money: 1030
+ 
+Starting round 18
+Ante for this round: 10
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 20
+ 
+Joe folded. Other player gets the pot of 20
+
+After round 18, player status: 
+ Name: Joe Dealer: False Money: 960
+ Name: Sue Dealer: True Money: 1040
+ 
+Starting round 19
+Ante for this round: 10
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 20
+ 
+Sue folded. Other player gets the pot of 20
+
+After round 19, player status: 
+ Name: Joe Dealer: True Money: 970
+ Name: Sue Dealer: False Money: 1030
+ 
+Starting round 20
+Ante for this round: 10
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 20
+ 
+Joe folded. Other player gets the pot of 20
+
+After round 20, player status: 
+ Name: Joe Dealer: False Money: 960
+ Name: Sue Dealer: True Money: 1040
+ 
+Starting round 21
+Ante for this round: 10
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 20
+ 
+Sue folded. Other player gets the pot of 20
+
+After round 21, player status: 
+ Name: Joe Dealer: True Money: 970
+ Name: Sue Dealer: False Money: 1030
+ 
+Starting round 22
+Ante for this round: 10
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 20
+ 
+Joe folded. Other player gets the pot of 20
+
+After round 22, player status: 
+ Name: Joe Dealer: False Money: 960
+ Name: Sue Dealer: True Money: 1040
+ 
+Starting round 23
+Ante for this round: 10
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 20
+ 
+Sue folded. Other player gets the pot of 20
+
+After round 23, player status: 
+ Name: Joe Dealer: True Money: 970
+ Name: Sue Dealer: False Money: 1030
+ 
+Starting round 24
+Ante for this round: 10
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 20
+ 
+Joe folded. Other player gets the pot of 20
+
+After round 24, player status: 
+ Name: Joe Dealer: False Money: 960
+ Name: Sue Dealer: True Money: 1040
+ 
+Starting round 25
+Ante for this round: 10
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 20
+ 
+Sue folded. Other player gets the pot of 20
+
+After round 25, player status: 
+ Name: Joe Dealer: True Money: 970
+ Name: Sue Dealer: False Money: 1030
+ 
+Starting round 26
+Ante for this round: 20
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 40
+ 
+Joe folded. Other player gets the pot of 40
+
+After round 26, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 27
+Ante for this round: 20
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 40
+ 
+Sue folded. Other player gets the pot of 40
+
+After round 27, player status: 
+ Name: Joe Dealer: True Money: 970
+ Name: Sue Dealer: False Money: 1030
+ 
+Starting round 28
+Ante for this round: 20
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 40
+ 
+Joe folded. Other player gets the pot of 40
+
+After round 28, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 29
+Ante for this round: 20
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 40
+ 
+Sue folded. Other player gets the pot of 40
+
+After round 29, player status: 
+ Name: Joe Dealer: True Money: 970
+ Name: Sue Dealer: False Money: 1030
+ 
+Starting round 30
+Ante for this round: 20
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 40
+ 
+Joe folded. Other player gets the pot of 40
+
+After round 30, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 31
+Ante for this round: 20
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 40
+ 
+Sue folded. Other player gets the pot of 40
+
+After round 31, player status: 
+ Name: Joe Dealer: True Money: 970
+ Name: Sue Dealer: False Money: 1030
+ 
+Starting round 32
+Ante for this round: 20
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 40
+ 
+Joe folded. Other player gets the pot of 40
+
+After round 32, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 33
+Ante for this round: 20
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 40
+ 
+Sue folded. Other player gets the pot of 40
+
+After round 33, player status: 
+ Name: Joe Dealer: True Money: 970
+ Name: Sue Dealer: False Money: 1030
+ 
+Starting round 34
+Ante for this round: 20
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 40
+ 
+Joe folded. Other player gets the pot of 40
+
+After round 34, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 35
+Ante for this round: 20
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 40
+ 
+Sue folded. Other player gets the pot of 40
+
+After round 35, player status: 
+ Name: Joe Dealer: True Money: 970
+ Name: Sue Dealer: False Money: 1030
+ 
+Starting round 36
+Ante for this round: 20
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 40
+ 
+Joe folded. Other player gets the pot of 40
+
+After round 36, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 37
+Ante for this round: 20
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 40
+ 
+Sue folded. Other player gets the pot of 40
+
+After round 37, player status: 
+ Name: Joe Dealer: True Money: 970
+ Name: Sue Dealer: False Money: 1030
+ 
+Starting round 38
+Ante for this round: 20
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 40
+ 
+Joe folded. Other player gets the pot of 40
+
+After round 38, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 39
+Ante for this round: 20
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 40
+ 
+Sue folded. Other player gets the pot of 40
+
+After round 39, player status: 
+ Name: Joe Dealer: True Money: 970
+ Name: Sue Dealer: False Money: 1030
+ 
+Starting round 40
+Ante for this round: 20
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 40
+ 
+Joe folded. Other player gets the pot of 40
+
+After round 40, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 41
+Ante for this round: 20
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 40
+ 
+Sue folded. Other player gets the pot of 40
+
+After round 41, player status: 
+ Name: Joe Dealer: True Money: 970
+ Name: Sue Dealer: False Money: 1030
+ 
+Starting round 42
+Ante for this round: 20
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 40
+ 
+Joe folded. Other player gets the pot of 40
+
+After round 42, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 43
+Ante for this round: 20
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 40
+ 
+Sue folded. Other player gets the pot of 40
+
+After round 43, player status: 
+ Name: Joe Dealer: True Money: 970
+ Name: Sue Dealer: False Money: 1030
+ 
+Starting round 44
+Ante for this round: 20
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 40
+ 
+Joe folded. Other player gets the pot of 40
+
+After round 44, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 45
+Ante for this round: 20
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 40
+ 
+Sue folded. Other player gets the pot of 40
+
+After round 45, player status: 
+ Name: Joe Dealer: True Money: 970
+ Name: Sue Dealer: False Money: 1030
+ 
+Starting round 46
+Ante for this round: 20
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 40
+ 
+Joe folded. Other player gets the pot of 40
+
+After round 46, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 47
+Ante for this round: 20
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 40
+ 
+Sue folded. Other player gets the pot of 40
+
+After round 47, player status: 
+ Name: Joe Dealer: True Money: 970
+ Name: Sue Dealer: False Money: 1030
+ 
+Starting round 48
+Ante for this round: 20
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 40
+ 
+Joe folded. Other player gets the pot of 40
+
+After round 48, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 49
+Ante for this round: 20
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 40
+ 
+Sue folded. Other player gets the pot of 40
+
+After round 49, player status: 
+ Name: Joe Dealer: True Money: 970
+ Name: Sue Dealer: False Money: 1030
+ 
+Starting round 50
+Ante for this round: 20
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 40
+ 
+Joe folded. Other player gets the pot of 40
+
+After round 50, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 51
+Ante for this round: 30
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Sue folded. Other player gets the pot of 60
+
+After round 51, player status: 
+ Name: Joe Dealer: True Money: 980
+ Name: Sue Dealer: False Money: 1020
+ 
+Starting round 52
+Ante for this round: 30
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Joe folded. Other player gets the pot of 60
+
+After round 52, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 53
+Ante for this round: 30
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Sue folded. Other player gets the pot of 60
+
+After round 53, player status: 
+ Name: Joe Dealer: True Money: 980
+ Name: Sue Dealer: False Money: 1020
+ 
+Starting round 54
+Ante for this round: 30
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Joe folded. Other player gets the pot of 60
+
+After round 54, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 55
+Ante for this round: 30
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Sue folded. Other player gets the pot of 60
+
+After round 55, player status: 
+ Name: Joe Dealer: True Money: 980
+ Name: Sue Dealer: False Money: 1020
+ 
+Starting round 56
+Ante for this round: 30
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Joe folded. Other player gets the pot of 60
+
+After round 56, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 57
+Ante for this round: 30
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Sue folded. Other player gets the pot of 60
+
+After round 57, player status: 
+ Name: Joe Dealer: True Money: 980
+ Name: Sue Dealer: False Money: 1020
+ 
+Starting round 58
+Ante for this round: 30
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Joe folded. Other player gets the pot of 60
+
+After round 58, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 59
+Ante for this round: 30
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Sue folded. Other player gets the pot of 60
+
+After round 59, player status: 
+ Name: Joe Dealer: True Money: 980
+ Name: Sue Dealer: False Money: 1020
+ 
+Starting round 60
+Ante for this round: 30
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Joe folded. Other player gets the pot of 60
+
+After round 60, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 61
+Ante for this round: 30
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Sue folded. Other player gets the pot of 60
+
+After round 61, player status: 
+ Name: Joe Dealer: True Money: 980
+ Name: Sue Dealer: False Money: 1020
+ 
+Starting round 62
+Ante for this round: 30
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Joe folded. Other player gets the pot of 60
+
+After round 62, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 63
+Ante for this round: 30
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Sue folded. Other player gets the pot of 60
+
+After round 63, player status: 
+ Name: Joe Dealer: True Money: 980
+ Name: Sue Dealer: False Money: 1020
+ 
+Starting round 64
+Ante for this round: 30
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Joe folded. Other player gets the pot of 60
+
+After round 64, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 65
+Ante for this round: 30
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Sue folded. Other player gets the pot of 60
+
+After round 65, player status: 
+ Name: Joe Dealer: True Money: 980
+ Name: Sue Dealer: False Money: 1020
+ 
+Starting round 66
+Ante for this round: 30
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Joe folded. Other player gets the pot of 60
+
+After round 66, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 67
+Ante for this round: 30
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Sue folded. Other player gets the pot of 60
+
+After round 67, player status: 
+ Name: Joe Dealer: True Money: 980
+ Name: Sue Dealer: False Money: 1020
+ 
+Starting round 68
+Ante for this round: 30
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Joe folded. Other player gets the pot of 60
+
+After round 68, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 69
+Ante for this round: 30
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Sue folded. Other player gets the pot of 60
+
+After round 69, player status: 
+ Name: Joe Dealer: True Money: 980
+ Name: Sue Dealer: False Money: 1020
+ 
+Starting round 70
+Ante for this round: 30
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Joe folded. Other player gets the pot of 60
+
+After round 70, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 71
+Ante for this round: 30
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Sue folded. Other player gets the pot of 60
+
+After round 71, player status: 
+ Name: Joe Dealer: True Money: 980
+ Name: Sue Dealer: False Money: 1020
+ 
+Starting round 72
+Ante for this round: 30
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Joe folded. Other player gets the pot of 60
+
+After round 72, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 73
+Ante for this round: 30
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Sue folded. Other player gets the pot of 60
+
+After round 73, player status: 
+ Name: Joe Dealer: True Money: 980
+ Name: Sue Dealer: False Money: 1020
+ 
+Starting round 74
+Ante for this round: 30
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Joe folded. Other player gets the pot of 60
+
+After round 74, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 75
+Ante for this round: 30
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Sue folded. Other player gets the pot of 60
+
+After round 75, player status: 
+ Name: Joe Dealer: True Money: 980
+ Name: Sue Dealer: False Money: 1020
+ 
+Starting round 76
+Ante for this round: 30
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Joe folded. Other player gets the pot of 60
+
+After round 76, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 77
+Ante for this round: 30
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Sue folded. Other player gets the pot of 60
+
+After round 77, player status: 
+ Name: Joe Dealer: True Money: 980
+ Name: Sue Dealer: False Money: 1020
+ 
+Starting round 78
+Ante for this round: 30
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Joe folded. Other player gets the pot of 60
+
+After round 78, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 79
+Ante for this round: 30
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Sue folded. Other player gets the pot of 60
+
+After round 79, player status: 
+ Name: Joe Dealer: True Money: 980
+ Name: Sue Dealer: False Money: 1020
+ 
+Starting round 80
+Ante for this round: 30
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Joe folded. Other player gets the pot of 60
+
+After round 80, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 81
+Ante for this round: 30
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Sue folded. Other player gets the pot of 60
+
+After round 81, player status: 
+ Name: Joe Dealer: True Money: 980
+ Name: Sue Dealer: False Money: 1020
+ 
+Starting round 82
+Ante for this round: 30
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Joe folded. Other player gets the pot of 60
+
+After round 82, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 83
+Ante for this round: 30
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Sue folded. Other player gets the pot of 60
+
+After round 83, player status: 
+ Name: Joe Dealer: True Money: 980
+ Name: Sue Dealer: False Money: 1020
+ 
+Starting round 84
+Ante for this round: 30
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Joe folded. Other player gets the pot of 60
+
+After round 84, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 85
+Ante for this round: 30
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Sue folded. Other player gets the pot of 60
+
+After round 85, player status: 
+ Name: Joe Dealer: True Money: 980
+ Name: Sue Dealer: False Money: 1020
+ 
+Starting round 86
+Ante for this round: 30
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Joe folded. Other player gets the pot of 60
+
+After round 86, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 87
+Ante for this round: 30
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Sue folded. Other player gets the pot of 60
+
+After round 87, player status: 
+ Name: Joe Dealer: True Money: 980
+ Name: Sue Dealer: False Money: 1020
+ 
+Starting round 88
+Ante for this round: 30
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Joe folded. Other player gets the pot of 60
+
+After round 88, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 89
+Ante for this round: 30
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Sue folded. Other player gets the pot of 60
+
+After round 89, player status: 
+ Name: Joe Dealer: True Money: 980
+ Name: Sue Dealer: False Money: 1020
+ 
+Starting round 90
+Ante for this round: 30
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Joe folded. Other player gets the pot of 60
+
+After round 90, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 91
+Ante for this round: 30
+Betting round 1:
+Sue played a bad action of raise and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Sue folded. Other player gets the pot of 60
+
+After round 91, player status: 
+ Name: Joe Dealer: True Money: 980
+ Name: Sue Dealer: False Money: 1020
+ 
+Starting round 92
+Ante for this round: 30
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Joe folded. Other player gets the pot of 60
+
+After round 92, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 93
+Ante for this round: 30
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Sue folded. Other player gets the pot of 60
+
+After round 93, player status: 
+ Name: Joe Dealer: True Money: 980
+ Name: Sue Dealer: False Money: 1020
+ 
+Starting round 94
+Ante for this round: 30
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Joe folded. Other player gets the pot of 60
+
+After round 94, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 95
+Ante for this round: 30
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Sue folded. Other player gets the pot of 60
+
+After round 95, player status: 
+ Name: Joe Dealer: True Money: 980
+ Name: Sue Dealer: False Money: 1020
+ 
+Starting round 96
+Ante for this round: 30
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Joe folded. Other player gets the pot of 60
+
+After round 96, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 97
+Ante for this round: 30
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Sue folded. Other player gets the pot of 60
+
+After round 97, player status: 
+ Name: Joe Dealer: True Money: 980
+ Name: Sue Dealer: False Money: 1020
+ 
+Starting round 98
+Ante for this round: 30
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Joe folded. Other player gets the pot of 60
+
+After round 98, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+Starting round 99
+Ante for this round: 30
+Betting round 1:
+Sue played a bad action of call and forfeits the hand
+Player: Sue Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Sue folded. Other player gets the pot of 60
+
+After round 99, player status: 
+ Name: Joe Dealer: True Money: 980
+ Name: Sue Dealer: False Money: 1020
+ 
+Starting round 100
+Ante for this round: 30
+Betting round 1:
+Joe played a bad action of call and forfeits the hand
+Player: Joe Action Phase: Bet1 Action Name: fold Amount: 0
+ 
+After Bet1, pot is 60
+ 
+Joe folded. Other player gets the pot of 60
+
+After round 100, player status: 
+ Name: Joe Dealer: False Money: 950
+ Name: Sue Dealer: True Money: 1050
+ 
+After 100 rounds:
+Joe has 950 credits and Sue has 1050credits. Sue is the winner!

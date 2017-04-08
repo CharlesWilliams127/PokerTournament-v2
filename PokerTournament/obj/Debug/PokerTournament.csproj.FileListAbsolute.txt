@@ -10,9 +10,21 @@ C:\Game AI Online\Projects\Project3\PokerTournament v2\PokerTournament\obj\Debug
 C:\Game AI Online\Projects\Project3\PokerTournament v2\PokerTournament\bin\Debug\PokerTournament.exe
 C:\Game AI Online\Projects\Project3\PokerTournament v2\PokerTournament\bin\Debug\PokerTournament.pdb
 C:\Game AI Online\Projects\Project3\PokerTournament v2\PokerTournament\obj\Debug\PokerTournament.csprojResolveAssemblyReference.cache
-D:\Profiles\crw4147\PokerTournament v2\PokerTournament\bin\Debug\PokerTournament.exe.config
-D:\Profiles\crw4147\PokerTournament v2\PokerTournament\obj\Debug\PokerTournament.exe
-D:\Profiles\crw4147\PokerTournament v2\PokerTournament\obj\Debug\PokerTournament.pdb
-D:\Profiles\crw4147\PokerTournament v2\PokerTournament\bin\Debug\PokerTournament.exe
-D:\Profiles\crw4147\PokerTournament v2\PokerTournament\bin\Debug\PokerTournament.pdb
-D:\Profiles\crw4147\PokerTournament v2\PokerTournament\obj\Debug\PokerTournament.csprojResolveAssemblyReference.cache
+C:\Game AI Online\Projects\Project3\PokerTournament v3\PokerTournament\bin\Debug\PokerTournament.exe.config
+C:\Game AI Online\Projects\Project3\PokerTournament v3\PokerTournament\obj\Debug\PokerTournament.exe
+C:\Game AI Online\Projects\Project3\PokerTournament v3\PokerTournament\obj\Debug\PokerTournament.pdb
+C:\Game AI Online\Projects\Project3\PokerTournament v3\PokerTournament\bin\Debug\PokerTournament.exe
+C:\Game AI Online\Projects\Project3\PokerTournament v3\PokerTournament\bin\Debug\PokerTournament.pdb
+C:\Game AI Online\Projects\Project3\PokerTournament v3\PokerTournament\obj\Debug\PokerTournament.csprojResolveAssemblyReference.cache
+C:\Game AI Online\Projects\Project3\PokerTournament v4\PokerTournament\bin\Debug\PokerTournament.exe.config
+C:\Game AI Online\Projects\Project3\PokerTournament v4\PokerTournament\obj\Debug\PokerTournament.exe
+C:\Game AI Online\Projects\Project3\PokerTournament v4\PokerTournament\obj\Debug\PokerTournament.pdb
+C:\Game AI Online\Projects\Project3\PokerTournament v4\PokerTournament\bin\Debug\PokerTournament.exe
+C:\Game AI Online\Projects\Project3\PokerTournament v4\PokerTournament\bin\Debug\PokerTournament.pdb
+C:\Game AI Online\Projects\Project3\PokerTournament v4\PokerTournament\obj\Debug\PokerTournament.csprojResolveAssemblyReference.cache
+C:\Users\Danielle\Desktop\PokerTournament v4\PokerTournament\bin\Debug\PokerTournament.exe.config
+C:\Users\Danielle\Desktop\PokerTournament v4\PokerTournament\obj\Debug\PokerTournament.exe
+C:\Users\Danielle\Desktop\PokerTournament v4\PokerTournament\obj\Debug\PokerTournament.pdb
+C:\Users\Danielle\Desktop\PokerTournament v4\PokerTournament\bin\Debug\PokerTournament.exe
+C:\Users\Danielle\Desktop\PokerTournament v4\PokerTournament\bin\Debug\PokerTournament.pdb
+C:\Users\Danielle\Desktop\PokerTournament v4\PokerTournament\obj\Debug\PokerTournament.csprojResolveAssemblyReference.cache

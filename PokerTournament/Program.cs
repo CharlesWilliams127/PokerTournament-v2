@@ -12,6 +12,16 @@ namespace PokerTournament
      * classes (with N being the team number) for each team whose methods 
      * will be called for decisions.
      * Kevin Bierre  Spring 2017
+     * 
+     * Version 3    4/4/2017:
+     *  Corrected a logic error when folding
+     *  Corrected a logic error in processing a call correctly
+     *  
+     * Version 4    4/4/2017
+     *  Corrected a logic error where the pot was not being reset in a couple of cases
+     *  Corrected the handling of calls during betting. If a player calls,
+     *      nobody else can bet.
+     *  Open Issue: is A2345 a valid straight?
      */
     class Program
     {
