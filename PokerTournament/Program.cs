@@ -28,12 +28,12 @@ namespace PokerTournament
         static void Main(string[] args)
         {
             // create two players
-            Human h0 = new Human(0, "Joe", 1000);
+            Human h0 = new Human(0, "Charles", 1000);
             //Human h1 = new Human(1, "Sue", 1000);
             Player6 ai = new Player6(1, "AI", 1000);
 
             // create the Game
-            Game myGame = new Game(h0, ai);
+            Game myGame = new Game(ai, h0);
 
             myGame.Tournament(); // run the game
         }

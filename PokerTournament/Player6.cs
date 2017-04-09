@@ -18,6 +18,7 @@ namespace PokerTournament
         int lastActionAmount;
         Actions currentAction;
         int amountToBet;
+        int bluffChance;
 
         public Player6(int idNum, string nm, int mny) : base(idNum, nm, mny)
         {
@@ -30,12 +31,20 @@ namespace PokerTournament
 
         public override PlayerAction BettingRound1(List<PlayerAction> actions, Card[] hand)
         {
+            // create a test hand to test reactions
+            Card[] testHand = new Card[5];
+            testHand[0] = new Card("Spades", 14);
+            testHand[1] = new Card("Diamonds", 14);
+            testHand[2] = new Card("Clubs", 14);
+            testHand[3] = new Card("Spades", 13);
+            testHand[4] = new Card("Hearts", 13);
+
             //info to keep track of
             bool isFirst = false;
             
             // evaluate the hand
             Card highCard = null;
-            int handStrength = Evaluate.RateAHand(hand, out highCard);
+            int handStrength = Evaluate.RateAHand(testHand, out highCard);
 
             //update stats
             if (actions.Count > 0) //ai goes second
@@ -55,91 +64,96 @@ namespace PokerTournament
             //setup action
             //Actions action = Actions.BET;
             PlayerAction pa = null;
-            int amount = 20;
+            //int amount = 20;
             Random rng = new Random();
 
             //start turn
             Console.WriteLine("\n-> in ai betting round 1");
             Console.WriteLine("   Total games played: "+roundNum);
+            ListTheHand(testHand);
 
             //if ai is first
             // actions available: bet, check, fold
-            if (isFirst)
-            {
-                int riskTaking= 0; //low=take no risk -- high=take much risk
-                                              //probably replace with calculated value based on overall game
-                int risk = 0;
-                amount = 0;
-                int act = 0;
-
-                //check hand strength
-                switch (handStrength)
-                {
-                    case 1: //fold, check or evaluate risk
-                        riskTaking = rng.Next(4); //low=take no risk -- high=take much risk
-
-                        switch (riskTaking)
-                        {
-                            case 0: action = Actions.FOLD;
-                                Console.WriteLine("AI plays it safe and folds");
-                                break;
-                            case 1: action = Actions.FOLD;
-                                Console.WriteLine("AI plays it safe and folds");
-                                break;
-                            case 2:
-                                act = rng.Next(3); //2/3 chance of folding
-                                if (act == 0) action = Actions.FOLD;
-                                else if (act == 1) action = Actions.FOLD;
-                                else if (act == 2) action = Actions.CHECK;
-                                Console.WriteLine("AI is considering taking a risk");
-                                break;
-                            case 3: action = Actions.BET;
-                                amount = 10; //<- replace with calc bet amount
-                                Console.WriteLine("AI is taking a risk");
-                                break;
-                        }
-                        break;
-                    case 2: //fold, check or evaluate risk
-                        break;
-                    case 3: //fold, check or evaluate risk
-                        break;
-                    case 4: //check or evaluate risk
-                        break;
-                    case 5: //check or evaluate risk
-                        break;
-                    case 6: //check or evaluate risk
-                        break;
-                    case 7: //check or evaluate risk
-                        break;
-                    case 8: action = Actions.BET;
-                            //calculate bet amount
-                        break;
-                    case 9: action = Actions.BET;
-                        //calculate bet amount
-                        break;
-                    case 10: action = Actions.BET;
-                        //calculate bet amount
-                        break;
-                }
-            }
+            if (Round1FirstCheck(actions, handStrength, startingMoney, out pa))
+                return pa;
             else
             {
-
+                pa = new PlayerAction(Name, "Bet1", "fold", 0);
             }
+                //int riskTaking= 0; //low=take no risk -- high=take much risk
+                                              //probably replace with calculated value based on overall game
+                //int risk = 0;
+                //amount = 0;
+                //int act = 0;
+
+                //check hand strength
+                //switch (handStrength)
+                //{
+                //    case 1: //fold, check or evaluate risk
+                //        riskTaking = rng.Next(4); //low=take no risk -- high=take much risk
+                //
+                //        switch (riskTaking)
+                //        {
+                //            case 0: action = Actions.FOLD;
+                //                Console.WriteLine("AI plays it safe and folds");
+                //                break;
+                //            case 1: action = Actions.FOLD;
+                //                Console.WriteLine("AI plays it safe and folds");
+                //                break;
+                //            case 2:
+                //                act = rng.Next(3); //2/3 chance of folding
+                //                if (act == 0) action = Actions.FOLD;
+                //                else if (act == 1) action = Actions.FOLD;
+                //                else if (act == 2) action = Actions.CHECK;
+                //                Console.WriteLine("AI is considering taking a risk");
+                //                break;
+                //            case 3: action = Actions.BET;
+                //                amount = 10; //<- replace with calc bet amount
+                //                Console.WriteLine("AI is taking a risk");
+                //                break;
+                //        }
+                //        break;
+                //    case 2: //fold, check or evaluate risk
+                //        break;
+                //    case 3: //fold, check or evaluate risk
+                //        break;
+                //    case 4: //check or evaluate risk
+                //        break;
+                //    case 5: //check or evaluate risk
+                //        break;
+                //    case 6: //check or evaluate risk
+                //        break;
+                //    case 7: //check or evaluate risk
+                //        break;
+                //    case 8: action = Actions.BET;
+                //            //calculate bet amount
+                //        break;
+                //    case 9: action = Actions.BET;
+                //        //calculate bet amount
+                //        break;
+                //    case 10: action = Actions.BET;
+                //        //calculate bet amount
+                //        break;
+                //}
+            //}
+            //else
+            //{
+            //
+            //}
 
 
 
             //end turn and submit action
             //create the PlayerAction
-            switch (action)
-            {
-                case Actions.BET: pa = new PlayerAction(Name, "Bet1", "bet", amount); break;
-                case Actions.RAISE: pa = new PlayerAction(Name, "Bet1", "raise", amount); break;
-                case Actions.CALL: pa = new PlayerAction(Name, "Bet1", "call", amount); break;
-                case Actions.CHECK: pa = new PlayerAction(Name, "Bet1", "check", amount); break;
-                case Actions.FOLD: pa = new PlayerAction(Name, "Bet1", "fold", amount); break;
-                default: Console.WriteLine("Invalid menu selection - try again"); break;
-            } Console.WriteLine("< end ai betting round 1 >");
+            //switch (action)
+            //{
+            //    case Actions.BET: pa = new PlayerAction(Name, "Bet1", "bet", amount); break;
+            //    case Actions.RAISE: pa = new PlayerAction(Name, "Bet1", "raise", amount); break;
+            //    case Actions.CALL: pa = new PlayerAction(Name, "Bet1", "call", amount); break;
+            //    case Actions.CHECK: pa = new PlayerAction(Name, "Bet1", "check", amount); break;
+            //    case Actions.FOLD: pa = new PlayerAction(Name, "Bet1", "fold", amount); break;
+            //    default: Console.WriteLine("Invalid menu selection - try again"); break;
+            //} Console.WriteLine("< end ai betting round 1 >");
             return pa;
         }
 
@@ -298,64 +312,107 @@ namespace PokerTournament
         // will process.
 
         // behavior tree nodes
-        private bool Round1FirstCheck(List<PlayerAction> actions, int handStrength)
+        private bool Round1FirstCheck(List<PlayerAction> actions, int handStrength, int currentMoney, out PlayerAction action)
         {
+            action = null;
             // check am I first?
             // if so, step into action selector
             if (actions.Count <= 0)
-                return Round1ActionSelector(TurnOrder.FIRST, handStrength);
+            {
+                action = Round1ActionSelector(TurnOrder.FIRST, handStrength, currentMoney, 0);
+                return true;
+            }
             
-            // otherwise return false
+            // otherwise return null to represent that we can't act
             return false;
         }
 
-        private bool Round1ActionSelector(TurnOrder myOrder, int handStrength)
+        private PlayerAction Round1ActionSelector(TurnOrder myOrder, int handStrength, int currentMoney, int opponentBet)
         {
+            // decalre a param to hold the actual bet
+            int bettingAmount;
+
             // if an action is processed, then return true
             switch(myOrder)
             {
                 // all we have to go off of in the first round is our own hand strength
                 case TurnOrder.FIRST: // currently in the first turn, the actions we can select are bet, check, and fold
-                    if (Round1Bet(handStrength))
-                        return true;
                     if (Round1Check(handStrength))
-                        return true;
-                    if (Round1Fold(handStrength))
-                        return true;
+                    {
+                        currentAction = Actions.CHECK;
+                        return new PlayerAction(Name, "Bet1", "check", 0);
+                    }
+                    if (Round1Bet(handStrength, currentMoney, out bettingAmount))
+                    {
+                        currentAction = Actions.BET;
+                        return new PlayerAction(Name, "Bet1", "bet", bettingAmount);
+                    }
+                    if (Round1Fold(handStrength, 0))
+                    {
+                        currentAction = Actions.FOLD;
+                        return new PlayerAction(Name, "Bet1", "fold", 0);
+                    }
                     break;
                 case TurnOrder.SECOND: // currently it is the second turn, the actions we can select are call, raise, fold
                     if (Round1PossibleCheck())
-                        return true;
+                        return new PlayerAction(Name, "Bet1", "check", 0);
                     if (Round1Call())
-                        return true;
+                        return new PlayerAction(Name, "Bet1", "call", 0);
                     if (Round1Raise())
-                        return true;
-                    if (Round1Fold(handStrength))
-                        return true;
+                        return new PlayerAction(Name, "Bet1", "raise", 0);
+                    if (Round1Fold(handStrength, opponentBet))
+                        return new PlayerAction(Name, "Bet1", "fold", 0);
                     break;
                 default:
                     Console.WriteLine("error: turn order not specified.");
-                    return false;
+                    return null;
             }
 
             // otherwise something went wrong and return false
-            return false;
+            return null;
         }
 
-        private bool Round1Bet(int handStrength)
+        private bool Round1Bet(int handStrength, int currentMoney, out int bettingAmount)
         {
+            bettingAmount = 0;
             // the AI is analyzing whether it should bet for round 1
             // assume value bet, that is, make the highest bet we think the opponent will call
+            // first, let's calculate our highest bet we're willing to do, we don't want to scare them off by going all in
+            int highestWillingBet = currentMoney / 3;
+
+            // determine whether we should bet
+            if (handStrength == 2)
+            {
+                bettingAmount = highestWillingBet / 3;
+                return true;
+            }
+            else if (handStrength == 3)
+            {
+                bettingAmount = highestWillingBet / 2;
+                return true;
+            }
+            else if (handStrength > 3)
+            {
+                bettingAmount = highestWillingBet;
+                return true;
+            }
+
             return false;
         }
         private bool Round1Check(int handStrength)
         {
             // the AI is analyzing whether it should check for round 1
+            if (handStrength == 1)
+                return true;
+
             return false;
         }
-        private bool Round1Fold(int handStrength)
+        private bool Round1Fold(int handStrength, int opponentBet)
         {
             // the AI is analyzing whether it should fold for round 1
+            if (opponentBet >= (100 * handStrength))
+                return true;
+
             return false;
         }
         private bool Round1Call()
@@ -385,6 +442,24 @@ namespace PokerTournament
 
             // otherwise return false
             return false;
+        }
+
+        // helper method - list the hand
+        // temporarily copied into here so we can see what the AI has
+        // TODO: delete when AI is working properly
+        private void ListTheHand(Card[] hand)
+        {
+            // evaluate the hand
+            Card highCard = null;
+            int rank = Evaluate.RateAHand(hand, out highCard);
+
+            // list your hand
+            Console.WriteLine("\nName: " + Name + " Your hand:   Rank: " + rank);
+            for (int i = 0; i < hand.Length; i++)
+            {
+                Console.Write(hand[i].ToString() + " ");
+            }
+            Console.WriteLine();
         }
     }
 }
