@@ -8,12 +8,14 @@ namespace PokerTournament
 {
     class Player6 : Player
     {
+        const int ANTE = 20;
         private enum Actions { CHECK, BET, CALL, RAISE, FOLD };
         private enum TurnOrder { FIRST, SECOND};
         
         int enemyFirstBet;
         int roundNum;
         int startingMoney;
+        int currentMoney;
         int lastActionStr;
         int lastActionAmount;
         Actions currentAction;
@@ -25,6 +27,7 @@ namespace PokerTournament
             enemyFirstBet = 0;
             roundNum = 0;
             startingMoney = mny;
+            currentMoney = startingMoney;
         }
 
         //Probabilities: http://www.math.hawaii.edu/~ramsey/Probability/PokerHands.html
@@ -33,18 +36,19 @@ namespace PokerTournament
         {
             // create a test hand to test reactions
             Card[] testHand = new Card[5];
-            testHand[0] = new Card("Spades", 14);
-            testHand[1] = new Card("Diamonds", 14);
-            testHand[2] = new Card("Clubs", 14);
-            testHand[3] = new Card("Spades", 13);
-            testHand[4] = new Card("Hearts", 13);
+            testHand[0] = new Card("Spades", 2);
+            testHand[1] = new Card("Diamonds", 2);
+            testHand[2] = new Card("Clubs", 7);
+            testHand[3] = new Card("Spades", 5);
+            testHand[4] = new Card("Hearts", 12);
 
             //info to keep track of
             bool isFirst = false;
+            roundNum = actions.Count;
             
             // evaluate the hand
             Card highCard = null;
-            int handStrength = Evaluate.RateAHand(testHand, out highCard);
+            int handStrength = Evaluate.RateAHand(hand, out highCard);
 
             //update stats
             if (actions.Count > 0) //ai goes second
@@ -70,15 +74,24 @@ namespace PokerTournament
             //start turn
             Console.WriteLine("\n-> in ai betting round 1");
             Console.WriteLine("   Total games played: "+roundNum);
-            ListTheHand(testHand);
+            //ListTheHand(testHand);
 
             //if ai is first
             // actions available: bet, check, fold
-            if (Round1FirstCheck(actions, handStrength, startingMoney, out pa))
-                return pa;
-            else
+            if (Round1FirstCheck(handStrength, out pa))
             {
-                pa = new PlayerAction(Name, "Bet1", "fold", 0);
+                // we're at round 0, increment so we get an accurate read
+                //roundNum++;
+                return pa;
+            }
+            else // the ai is going second, actions available: check, call, raise, fold
+            {
+                //roundNum++;
+                pa = Round1ActionSelector(TurnOrder.SECOND, actions[roundNum - 1], handStrength);
+                //int aas = roundNum - 1;
+                //Console.WriteLine("roundNum - 1 = " + aas + " roundNum = " + actions.Count);
+                //pa = new PlayerAction(Name, "Bet1", "fold", 0);
+                return pa;
             }
                 //int riskTaking= 0; //low=take no risk -- high=take much risk
                                               //probably replace with calculated value based on overall game
@@ -154,7 +167,7 @@ namespace PokerTournament
             //    case Actions.FOLD: pa = new PlayerAction(Name, "Bet1", "fold", amount); break;
             //    default: Console.WriteLine("Invalid menu selection - try again"); break;
             //} Console.WriteLine("< end ai betting round 1 >");
-            return pa;
+            //return pa;
         }
 
         public override PlayerAction BettingRound2(List<PlayerAction> actions, Card[] hand)
@@ -312,14 +325,15 @@ namespace PokerTournament
         // will process.
 
         // behavior tree nodes
-        private bool Round1FirstCheck(List<PlayerAction> actions, int handStrength, int currentMoney, out PlayerAction action)
+        private bool Round1FirstCheck(int handStrength, out PlayerAction action)
         {
             action = null;
             // check am I first?
             // if so, step into action selector
-            if (actions.Count <= 0)
+            if (roundNum <= 0)
             {
-                action = Round1ActionSelector(TurnOrder.FIRST, handStrength, currentMoney, 0);
+                currentMoney -= ANTE;
+                action = Round1ActionSelector(TurnOrder.FIRST, null, handStrength);
                 return true;
             }
             
@@ -327,7 +341,7 @@ namespace PokerTournament
             return false;
         }
 
-        private PlayerAction Round1ActionSelector(TurnOrder myOrder, int handStrength, int currentMoney, int opponentBet)
+        private PlayerAction Round1ActionSelector(TurnOrder myOrder, PlayerAction prevAction, int handStrength)
         {
             // decalre a param to hold the actual bet
             int bettingAmount;
@@ -342,26 +356,44 @@ namespace PokerTournament
                         currentAction = Actions.CHECK;
                         return new PlayerAction(Name, "Bet1", "check", 0);
                     }
-                    if (Round1Bet(handStrength, currentMoney, out bettingAmount))
+                    if (Round1Bet(handStrength, out bettingAmount))
                     {
                         currentAction = Actions.BET;
+                        currentMoney -= bettingAmount;
                         return new PlayerAction(Name, "Bet1", "bet", bettingAmount);
                     }
-                    if (Round1Fold(handStrength, 0))
+                    if (Round1Fold(handStrength, prevAction))
                     {
                         currentAction = Actions.FOLD;
                         return new PlayerAction(Name, "Bet1", "fold", 0);
                     }
                     break;
                 case TurnOrder.SECOND: // currently it is the second turn, the actions we can select are call, raise, fold
-                    if (Round1PossibleCheck())
+                    if (Round1PossibleCheck(handStrength, prevAction))
+                    {
+                        currentAction = Actions.CHECK;
                         return new PlayerAction(Name, "Bet1", "check", 0);
-                    if (Round1Call())
-                        return new PlayerAction(Name, "Bet1", "call", 0);
-                    if (Round1Raise())
-                        return new PlayerAction(Name, "Bet1", "raise", 0);
-                    if (Round1Fold(handStrength, opponentBet))
+                    }
+                    if (Round1PossibleBet(handStrength, prevAction, out bettingAmount))
+                    {
+                        currentAction = Actions.BET;
+                        return new PlayerAction(Name, "Bet1", "bet", bettingAmount);
+                    }
+                    if (Round1Raise(handStrength, prevAction, out bettingAmount))
+                    {
+                        currentAction = Actions.RAISE;
+                        return new PlayerAction(Name, "Bet1", "raise", bettingAmount);
+                    }
+                    if (Round1Call(handStrength, prevAction, out bettingAmount))
+                    {
+                        currentAction = Actions.CALL;
+                        return new PlayerAction(Name, "Bet1", "call", bettingAmount);
+                    }
+                    if (Round1Fold(handStrength, prevAction))
+                    {
+                        currentAction = Actions.FOLD;
                         return new PlayerAction(Name, "Bet1", "fold", 0);
+                    }
                     break;
                 default:
                     Console.WriteLine("error: turn order not specified.");
@@ -372,7 +404,7 @@ namespace PokerTournament
             return null;
         }
 
-        private bool Round1Bet(int handStrength, int currentMoney, out int bettingAmount)
+        private bool Round1Bet(int handStrength, out int bettingAmount)
         {
             bettingAmount = 0;
             // the AI is analyzing whether it should bet for round 1
@@ -407,38 +439,98 @@ namespace PokerTournament
 
             return false;
         }
-        private bool Round1Fold(int handStrength, int opponentBet)
+        private bool Round1Fold(int handStrength, PlayerAction prevAction)
         {
             // the AI is analyzing whether it should fold for round 1
-            if (opponentBet >= (100 * handStrength))
+            //if (prevAction != null && prevAction.Amount > (100 * handStrength))
                 return true;
 
-            return false;
+            //return false;
         }
-        private bool Round1Call()
+        private bool Round1Call(int handStrength, PlayerAction prevAction, out int callAmount)
         {
+            int highestWillingBet = handStrength * 50;
+            callAmount = 0;
             // the AI is analyzing whether it should call for round 1
+
+            // first, check the states in which it can call
+            if (prevAction.ActionName == "bet" || prevAction.ActionName == "raise")
+            {
+                if (prevAction.Amount <= highestWillingBet)
+                {
+                    //int amountToBet = handStrength * 25;
+                    if (handStrength >= 2)
+                    {
+                        if (prevAction.Amount < currentMoney)
+                            callAmount = prevAction.Amount;
+                        else
+                            callAmount = currentMoney;
+
+                        currentMoney -= callAmount;
+                        return true;
+                    }
+
+                }
+            }
             return false;
         }
-        private bool Round1Raise()
+        private bool Round1Raise(int handStrength, PlayerAction prevAction, out int raiseAmount)
         {
+            raiseAmount = 0;
             // the AI is analyzing whether it should raise for round 1
+            //int highestWillingBet = currentMoney / 2;
+            if (prevAction.ActionName == "check")
+            {
+                if (handStrength * 75 < currentMoney)
+                    raiseAmount = handStrength * 75;
+                else
+                    raiseAmount = currentMoney;
+
+                currentMoney -= raiseAmount;
+                return true;
+            }
+
+            // first, check the states in which it can raise
+            if (prevAction.ActionName == "bet" || prevAction.ActionName == "raise")
+            {
+                int tempRaiseAmount = handStrength * 50;
+
+                if (prevAction.Amount < tempRaiseAmount)
+                {
+                    if (handStrength > 1)
+                    {
+                        if (tempRaiseAmount / 2 < currentMoney)
+                            raiseAmount = tempRaiseAmount / 2;
+                        else
+                            raiseAmount = currentMoney;
+
+                        currentMoney -= raiseAmount;
+                        return true;
+                    }
+                }
+            }
             return false;
         }
 
-        private bool Round1PossibleCheck()
+        private bool Round1PossibleCheck(int handStrength, PlayerAction prevAction)
         {
             // can I check?
             // if so, step into the checking selector
+            if (prevAction.ActionName == "check")
+                return Round1Check(handStrength);
 
             // otherwise return false
             return false;
         }
 
-        private bool Round1CheckingSelector()
+        private bool Round1PossibleBet(int handStrength,PlayerAction prevAction, out int bettingAmount)
         {
-            // should I check?
-            // if so, set the current state to checking and return true
+            bettingAmount = 0;
+
+            // can I bet?
+            // if so, step into the betting selector
+            if (prevAction == null || prevAction.ActionName == "check")
+                return Round1Bet(handStrength, out bettingAmount);
 
             // otherwise return false
             return false;
