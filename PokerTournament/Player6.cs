@@ -9,12 +9,15 @@ namespace PokerTournament
     class Player6 : Player
     {
         private enum Actions { CHECK, BET, CALL, RAISE, FOLD };
+        private enum TurnOrder { FIRST, SECOND};
         
         int enemyFirstBet;
         int roundNum;
         int startingMoney;
         int lastActionStr;
         int lastActionAmount;
+        Actions currentAction;
+        int amountToBet;
 
         public Player6(int idNum, string nm, int mny) : base(idNum, nm, mny)
         {
@@ -50,7 +53,7 @@ namespace PokerTournament
             }
 
             //setup action
-            Actions action = Actions.BET;
+            //Actions action = Actions.BET;
             PlayerAction pa = null;
             int amount = 20;
             Random rng = new Random();
@@ -290,21 +293,79 @@ namespace PokerTournament
             return pa;
         }
 
+        // the behavior tree will analyze which action seems most logical
+        // it will then feed that info into the current state which our FSM
+        // will process.
+
         // behavior tree nodes
-        private bool Round1FirstCheck()
+        private bool Round1FirstCheck(List<PlayerAction> actions, int handStrength)
         {
             // check am I first?
             // if so, step into action selector
-
+            if (actions.Count <= 0)
+                return Round1ActionSelector(TurnOrder.FIRST, handStrength);
+            
             // otherwise return false
             return false;
         }
 
-        private bool Round1ActionSelector(Actions [] possibleActions)
+        private bool Round1ActionSelector(TurnOrder myOrder, int handStrength)
         {
             // if an action is processed, then return true
+            switch(myOrder)
+            {
+                // all we have to go off of in the first round is our own hand strength
+                case TurnOrder.FIRST: // currently in the first turn, the actions we can select are bet, check, and fold
+                    if (Round1Bet(handStrength))
+                        return true;
+                    if (Round1Check(handStrength))
+                        return true;
+                    if (Round1Fold(handStrength))
+                        return true;
+                    break;
+                case TurnOrder.SECOND: // currently it is the second turn, the actions we can select are call, raise, fold
+                    if (Round1PossibleCheck())
+                        return true;
+                    if (Round1Call())
+                        return true;
+                    if (Round1Raise())
+                        return true;
+                    if (Round1Fold(handStrength))
+                        return true;
+                    break;
+                default:
+                    Console.WriteLine("error: turn order not specified.");
+                    return false;
+            }
 
-            // otherwise return false
+            // otherwise something went wrong and return false
+            return false;
+        }
+
+        private bool Round1Bet(int handStrength)
+        {
+            // the AI is analyzing whether it should bet for round 1
+            // assume value bet, that is, make the highest bet we think the opponent will call
+            return false;
+        }
+        private bool Round1Check(int handStrength)
+        {
+            // the AI is analyzing whether it should check for round 1
+            return false;
+        }
+        private bool Round1Fold(int handStrength)
+        {
+            // the AI is analyzing whether it should fold for round 1
+            return false;
+        }
+        private bool Round1Call()
+        {
+            // the AI is analyzing whether it should call for round 1
+            return false;
+        }
+        private bool Round1Raise()
+        {
+            // the AI is analyzing whether it should raise for round 1
             return false;
         }
 
