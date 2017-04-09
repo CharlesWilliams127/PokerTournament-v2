@@ -289,5 +289,41 @@ namespace PokerTournament
             // return the action
             return pa;
         }
+
+        // behavior tree nodes
+        private bool Round1FirstCheck()
+        {
+            // check am I first?
+            // if so, step into action selector
+
+            // otherwise return false
+            return false;
+        }
+
+        private bool Round1ActionSelector(Actions [] possibleActions)
+        {
+            // if an action is processed, then return true
+
+            // otherwise return false
+            return false;
+        }
+
+        private bool Round1PossibleCheck()
+        {
+            // can I check?
+            // if so, step into the checking selector
+
+            // otherwise return false
+            return false;
+        }
+
+        private bool Round1CheckingSelector()
+        {
+            // should I check?
+            // if so, set the current state to checking and return true
+
+            // otherwise return false
+            return false;
+        }
     }
 }
