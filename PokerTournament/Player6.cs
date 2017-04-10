@@ -26,6 +26,7 @@ namespace PokerTournament
         int roundNum;
         int startingMoney;
         int currentMoney;
+        int raiseCounter = 0;
         
         int lastActionStr;
         int lastActionAmount;
@@ -50,11 +51,11 @@ namespace PokerTournament
         {
             // create a test hand to test reactions
             Card[] testHand = new Card[5];
-            testHand[0] = new Card("Spades", 14);
-            testHand[1] = new Card("Diamonds", 14);
-            testHand[2] = new Card("Clubs", 14);
-            testHand[3] = new Card("Spades", 13);
-            testHand[4] = new Card("Hearts", 13);
+            testHand[0] = new Card("Spades", 4);
+            testHand[1] = new Card("Diamonds", 6);
+            testHand[2] = new Card("Diamonds", 11);
+            testHand[3] = new Card("Spades", 12);
+            testHand[4] = new Card("Hearts", 7);
 
             int test = (int)(((float)rng.Next(33, 100) / 0.01) * 100);
             //Console.Writ
@@ -88,7 +89,7 @@ namespace PokerTournament
             //start turn
             Console.WriteLine("\n-> in ai betting round 1");
             Console.WriteLine("   Total games played: "+roundNum);
-            ListTheHand(hand);
+            //ListTheHand(hand);
 
             //if ai is first
             // actions available: bet, check, fold
@@ -102,7 +103,7 @@ namespace PokerTournament
             {
                 // evaluate the enemy's hand
                 estimatedEnemyHand = EvaluateEnemyHand(actions);
-                Console.WriteLine("Estimated enemy hand strength: " + estimatedEnemyHand);
+                //Console.WriteLine("Estimated enemy hand strength: " + estimatedEnemyHand);
  
                 pa = Round1ActionSelector(TurnOrder.SECOND, actions[roundNum - 1], handStrength, highCard);
                 return pa;
@@ -417,17 +418,23 @@ namespace PokerTournament
 
             if (roundNum > 0)
             { 
+                if (enemyActions[roundNum - 1].ActionName == "raise")
+                {
+                    risk -= (float)rng.NextDouble() * (-.1f);
+                    estimatedValue += 0.1f;
+                }
+
                 int averageBet = totalEnemyBid / roundNum;
 
-                if (averageBet > 20 && averageBet < 50)
+                if (averageBet > 0 && averageBet < 50)
                 {
                     risk += (float)rng.NextDouble() * (.1f);
-                    estimatedValue+= 0.2f;
+                    estimatedValue-= 0.1f;
                 }
                 if (averageBet > 49 && averageBet < 100)
                 {
-                    risk = 0.0f;
-                    estimatedValue+= 0.3f;
+                    risk = (float)rng.NextDouble() * (.1f);
+                    estimatedValue += 0.2f;
                 }
                 if (averageBet > 99 && averageBet < 200)
                 {
@@ -437,7 +444,7 @@ namespace PokerTournament
                 if (averageBet > 199 && averageBet < 1000)
                 {
                     risk -= (float)rng.NextDouble() * (-.4f);
-                    estimatedValue += 0.9f;
+                    estimatedValue += 0.6f;
                 }
             }
 
@@ -534,7 +541,6 @@ namespace PokerTournament
             }
 
             // otherwise something went wrong and return fold
-            Console.WriteLine("Something went wrong in selecting an action...");
             return new PlayerAction(Name, "Bet1", "fold", 0);
         }
 
@@ -547,9 +553,11 @@ namespace PokerTournament
             int highestWillingBet = currentMoney / 4;
 
 
-            if (handStrength == 1 && highCard.Value > 12)
+            if (handStrength == 1 && highCard.Value >= 12)
             {
                 int baseBet = highestWillingBet / 6;
+                bettingAmount = rng.Next(baseBet / 8, baseBet / 6);
+                return true;
             }
 
             // determine whether we should bet
@@ -577,7 +585,7 @@ namespace PokerTournament
         private bool Round1Check(int handStrength, Card highCard)
         {
             // the AI is analyzing whether it should check for round 1
-            if (handStrength == 1)
+            if (handStrength == 1 && highCard.Value < 12)
                 return true;
 
             return false;
@@ -630,6 +638,8 @@ namespace PokerTournament
             // if the difference in hands is negative then they've maybe got a better hand than us
             float diffHands = ((float)handStrength * 0.1f) - estimatedEnemyHand;
 
+            if (raiseCounter >= handStrength)
+                return false;
 
             if (prevAction.ActionName == "check")
             {
@@ -640,12 +650,25 @@ namespace PokerTournament
                     raiseAmount = currentMoney;
 
                 currentMoney -= raiseAmount + prevAction.Amount;
+                raiseCounter++;
                 return true;
             }
 
             // first, check the states in which it can raise
             if (prevAction.ActionName == "bet" || prevAction.ActionName == "raise")
             {
+                if (diffHands >= (0.1 + risk) && handStrength >= 3)
+                {
+                    if (tempRaiseAmount / 2 < currentMoney)
+                        raiseAmount = rng.Next(tempRaiseAmount / 4, tempRaiseAmount / 2) + (int)(risk * 10);
+                    else
+                        raiseAmount = currentMoney;
+
+                    currentMoney -= raiseAmount + prevAction.Amount;
+                    raiseCounter++;
+                    return true;
+                }
+            
 
                 if (diffHands >= (0.1 + risk) && highCard.Value > rng.Next(9, 11))
                 {
@@ -657,6 +680,7 @@ namespace PokerTournament
                             raiseAmount = currentMoney;
 
                         currentMoney -= raiseAmount + prevAction.Amount;
+                        raiseCounter++;
                         return true;
                     }
                 }
