@@ -535,7 +535,7 @@ namespace PokerTournament
             // if so, step into action selector
             if (roundNum <= 0)
             {
-                currentMoney -= ANTE;
+                //currentMoney -= ANTE;
                 action = Round1ActionSelector(TurnOrder.FIRST, null, handStrength, highCard);
                 return true;
             }
@@ -628,7 +628,7 @@ namespace PokerTournament
             if (handStrength == 1 && highCard.Value >= 12)
             {
                 int baseBet = highestWillingBet / 6;
-                bettingAmount = rng.Next(baseBet / 8, baseBet / 6);
+                bettingAmount = baseBet;
                 return true;
             }
 
@@ -636,19 +636,19 @@ namespace PokerTournament
             if (handStrength == 2)
             {
                 int baseBet = highestWillingBet / 3;
-                bettingAmount = rng.Next(baseBet / 2, baseBet);
+                bettingAmount = baseBet;
                 return true;
             }
             else if (handStrength == 3)
             {
                 int baseBet = highestWillingBet / 2;
-                bettingAmount = rng.Next(baseBet / 2, baseBet);
+                bettingAmount = baseBet;
                 return true;
             }
             else if (handStrength > 3)
             {
                 int baseBet = highestWillingBet;
-                bettingAmount = rng.Next(baseBet / 2, baseBet);
+                bettingAmount = baseBet;
                 return true;
             }
 
