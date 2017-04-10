@@ -30,6 +30,10 @@ namespace PokerTournament
         int lastActionStr;
         int lastActionAmount;
         Actions currentAction;
+        int amountToBet;
+        int bluffChance;
+        int previousBet;
+        int currentBet;
 
         public Player6(int idNum, string nm, int mny) : base(idNum, nm, mny)
         {
@@ -103,25 +107,163 @@ namespace PokerTournament
                 pa = Round1ActionSelector(TurnOrder.SECOND, actions[roundNum - 1], handStrength, highCard);
                 return pa;
             }
+
         }
 
         public override PlayerAction BettingRound2(List<PlayerAction> actions, Card[] hand)
         {
-            // select an action
-            string actionSelection = "5";
-            PlayerAction pa = null;
-            int amount = 0;
-
             Console.WriteLine("-> in ai betting round 2");
 
-            // create the PlayerAction
-            switch (actionSelection)
+            // evaluate the hand
+            Card highCard = null;
+            int handStrength = Evaluate.RateAHand(hand, out highCard);
+
+            //setup action
+            Actions action = Actions.BET;
+            PlayerAction pa = null;
+            Random rng = new Random();
+
+            //keep track of
+            float amount = 0;
+            int risk = 0;
+            int act = 0;
+            bool isFirst = true;
+
+            float riskTaking = rng.Next(100); //low=take no risk -- high=take much risk
+                                            //probably replace with calculated value based on overall game
+
+            //get previous bet
+            for(int i = actions.Count-1; i > 0 ; i--) {
+                if(actions[i].ActionPhase == "Bet1" && (actions[i].ActionName == "bet"|| (actions[i].ActionName == "call")|| (actions[i].ActionName == "raise")))
+                {
+                    previousBet = currentBet = actions[i].Amount; //update last bet (round 1 bet)
+                    break;
+                }
+            }
+            //check if first
+            if(actions[actions.Count-1].ActionPhase == "Draw") //if was just in last phase
             {
-                case "1": pa = new PlayerAction(Name, "Bet2", "bet", amount); break;
-                case "2": pa = new PlayerAction(Name, "Bet2", "raise", amount); break;
-                case "3": pa = new PlayerAction(Name, "Bet2", "call", amount); break;
-                case "4": pa = new PlayerAction(Name, "Bet2", "check", amount); break;
-                case "5": pa = new PlayerAction(Name, "Bet2", "fold", amount); break;
+                if (actions[actions.Count - 1].Name == Name) //if ai went last
+                {
+                    isFirst = false;
+                }
+            }
+
+            //check hand strength and decide on move
+            if (handStrength == 1 || handStrength == 2) {
+                if (riskTaking < 100 * 1 / 6)
+                {
+                    action = Actions.FOLD;
+                    Console.WriteLine("AI gives in and folds");
+                }
+                else if (riskTaking < 100 * 4 / 6) {
+                    action = Actions.CHECK;
+                    Console.WriteLine("AI plays it safe and checks");
+                }
+                else if (riskTaking < 100 * 5 / 6) {
+                    act = rng.Next(3); //2/3 chance of folding
+                    if (act == 0) action = Actions.CHECK;
+                    else if (act == 1) action = Actions.CHECK;
+                    else if (act == 2) amount = Bet(isFirst, handStrength, previousBet, riskTaking, out action);
+                    Console.WriteLine("AI is considering taking a risk");
+                }
+                else {
+                    amount = Bet(isFirst, handStrength, previousBet, riskTaking, out action);
+                    Console.WriteLine("AI is taking a risk");
+                }
+            }
+            if (handStrength > 2 && handStrength <= 5) // 3, 4, 5
+            { //check or evaluate risk
+                float mod = riskTaking * (handStrength/10 * 0.55f);
+
+                if (riskTaking+mod < 100 * 1 / 10)
+                {
+                    action = Actions.FOLD;
+                    Console.WriteLine("AI gives in and folds");
+                }
+                else if (riskTaking + mod < 100 * 3 / 6)
+                {
+                    action = Actions.CHECK;
+                    Console.WriteLine("AI plays it safe and checks");
+                }
+                else if (riskTaking + mod < 100 * 5 / 6)
+                {
+                    act = rng.Next(100);
+                    if (act+mod < 25) action = Actions.CHECK;
+                    else if (act + mod < 50 && !isFirst) action = Actions.CALL;
+                    else amount = Bet(isFirst, handStrength, previousBet, riskTaking, out action);
+                    Console.WriteLine("AI is considering taking a risk");
+                }
+                else
+                {
+                    amount = Bet(isFirst, handStrength, previousBet, riskTaking, out action);
+                    Console.WriteLine("AI is taking a risk");
+                }
+            }
+            if (handStrength > 5 && handStrength <= 8) // 6, 7, 8
+            {
+                //check or evaluate risk
+                float mod = riskTaking * (handStrength/10 * 0.7f);
+
+                if (riskTaking + mod < 100 * 1 / 18)
+                {
+                    action = Actions.CHECK;
+                    Console.WriteLine("AI gives in and checks");
+                }
+                else if (riskTaking + mod < 100 * 1.8 / 6)
+                {
+                    if (!isFirst) action = Actions.CALL;
+                    else amount = Bet(isFirst, handStrength, previousBet, riskTaking*0.8f, out action);
+
+                    Console.WriteLine("AI plays it safe and calls");
+                }
+                else if (riskTaking + mod < 100 * 5 / 6)
+                {
+                    act = rng.Next(100);
+                    if (act + mod < 10) action = Actions.CHECK;
+                    if (act + mod < 50 && !isFirst) action = Actions.CALL;
+                    else amount = Bet(isFirst, handStrength, previousBet, riskTaking, out action);
+                    Console.WriteLine("AI is considering taking a risk");
+                }
+                else
+                {
+                    amount = Bet(isFirst, handStrength, previousBet, riskTaking, out action);
+                    Console.WriteLine("AI is taking a risk");
+                }
+            }
+            if (handStrength == 9 || handStrength == 10) // 9, 10
+            { //check or evaluate risk
+                //check or evaluate risk
+                float mod = riskTaking * (handStrength/10 * 0.9f);
+
+                if (riskTaking + mod < 100 * 4.5 / 10)
+                {
+                    if(!isFirst)action = Actions.CALL;
+                    Console.WriteLine("AI tries to bluff and calls");
+                }
+                else if (riskTaking + mod < 100 * 7 / 10)
+                {
+                    act = rng.Next(100);
+                    if (act + mod < 50 && !isFirst) action = Actions.CALL;
+                    else amount = Bet(isFirst, handStrength, previousBet, riskTaking, out action);
+                    Console.WriteLine("AI is considering bluffing to raise pot");
+                }
+                else
+                {
+                    amount = Bet(isFirst, handStrength, previousBet, riskTaking, out action);
+                    Console.WriteLine("AI is confident and raises the bet");
+                }
+            }
+
+            //end turn and submit action
+            //create the PlayerAction
+            switch (action)
+            {
+                case Actions.BET: pa = new PlayerAction(Name, "Bet2", "bet", (int)Math.Ceiling(amount)); break;
+                case Actions.RAISE: pa = new PlayerAction(Name, "Bet2", "raise", (int)Math.Ceiling(amount)); break;
+                case Actions.CALL: pa = new PlayerAction(Name, "Bet2", "call", (int)Math.Ceiling(amount)); break;
+                case Actions.CHECK: pa = new PlayerAction(Name, "Bet2", "check", (int)Math.Ceiling(amount)); break;
+                case Actions.FOLD: pa = new PlayerAction(Name, "Bet2", "fold", (int)Math.Ceiling(amount)); break;
                 default: Console.WriteLine("Invalid menu selection - try again"); break;
             } Console.WriteLine("< end ai betting round 2 >");
 
@@ -545,6 +687,30 @@ namespace PokerTournament
             // otherwise return false
             return false;
         }
+
+        private float Bet(bool isFirst, int handStrength, int previousBet, float risk, out Actions action)
+        {
+            float bet;
+
+            if (isFirst)
+            {
+                action = Actions.BET;
+                //bet upto double of previous bet depending on risk factor
+                bet = ( previousBet + ( handStrength / 10 * previousBet ) / 2 ) * 2 *risk/10;
+            }
+            else
+            {
+                action = Actions.RAISE;
+                //bet upto double of previous bet depending on risk factor
+                bet = ( previousBet + ( handStrength / 10 * previousBet ) ) * 2 * risk/10;
+            }
+
+            //make sure you dont bet more than you have
+            if (Money - bet < 0) bet = Money * ( 0.8f * risk / 10 );
+
+            return bet;
+        }
+
 
         // helper method - list the hand
         // temporarily copied into here so we can see what the AI has
