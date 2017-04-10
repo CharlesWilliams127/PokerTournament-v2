@@ -270,18 +270,17 @@ namespace PokerTournament
 
         public override PlayerAction Draw(Card[] hand)
         {
-            Console.WriteLine("-> in ai draw round");
-
-            // determine how many cards to delete
             Card curHighCard;
             int curHandStrength = Evaluate.RateAHand(hand, out curHighCard);
             bool takeASmallRisk = false;
             bool takeABigRisk = false;
             
+            //Determine if we need to take a risk
             if (estimatedEnemyHand > 0.15f && estimatedEnemyHand <= 0.35f)
             {
                 takeASmallRisk = true;
-            } else if (estimatedEnemyHand > 0.35f)
+            }
+            else if (estimatedEnemyHand > 0.35f)
             {
                 takeASmallRisk = true;
                 takeABigRisk = true;
@@ -359,17 +358,17 @@ namespace PokerTournament
                         }
                         else
                         {
-                            if (SimilarSuitedCards(hand, out deleteIndices) >= 3)
+                            if (SimilarSuitedCards(hand, out deleteIndices) >= 3) //Is it almost a flush?
                             {
                                 DeleteCards(hand, deleteIndices);
                                 pa = new PlayerAction(Name, "Draw", "draw", deleteIndices.Count);
                             }
-                            else if (ConsecutiveCards(hand, out deleteIndices) >= 3)
+                            else if (ConsecutiveCards(hand, out deleteIndices) >= 3) //Is it almost a straight?
                             {
                                 DeleteCards(hand, deleteIndices);
                                 pa = new PlayerAction(Name, "Draw", "draw", deleteIndices.Count);
                             }
-                            else
+                            else // Ditch the 5th card
                             {
                                 hand[OddCardOut(hand)] = null;
                             }
@@ -377,24 +376,24 @@ namespace PokerTournament
                     }
                     else
                     {
-                        if (SimilarSuitedCards(hand, out deleteIndices) >= 3)
+                        if (SimilarSuitedCards(hand, out deleteIndices) >= 3) //Is it almost a flush?
                         {
                             DeleteCards(hand, deleteIndices);
                             pa = new PlayerAction(Name, "Draw", "draw", deleteIndices.Count);
                         }
-                        else if (ConsecutiveCards(hand, out deleteIndices) >= 3)
+                        else if (ConsecutiveCards(hand, out deleteIndices) >= 3) //Is it almost a straight?
                         {
                             DeleteCards(hand, deleteIndices);
                             pa = new PlayerAction(Name, "Draw", "draw", deleteIndices.Count);
                         }
                         else
                         {
-                            if (curHandStrength == 2)
+                            if (curHandStrength == 2) //Is it a pair?
                             {
                                 DeleteCards(hand, UnmatchingCards(hand, 2));
                                 pa = new PlayerAction(Name, "Draw", "draw", 3);
                             }
-                            else
+                            else //Ditch all but the high card
                             {
                                 for (int i = 0; i < hand.Length; i++)
                                 {
@@ -410,10 +409,11 @@ namespace PokerTournament
                 }
                 else
                 {
-                    if (curHandStrength > 2)
+                    if (curHandStrength > 2) //Is it a medium strength hand?
                     {
-                        if (curHandStrength == 4)
+                        if (curHandStrength == 4) //Is it a 3 of a kind?
                         {
+                            //Find the high card of the 2 remaining, discard the lower
                             List<int> tempCardList = UnmatchingCards(hand, 3);
                             int deleteIndex = 0;
                             foreach (int i in tempCardList)
@@ -436,19 +436,19 @@ namespace PokerTournament
                             }
                             pa = new PlayerAction(Name, "Draw", "draw", 1);
                         }
-                        else
+                        else //If a two pair, ditch the 5th card
                         {
                             hand[OddCardOut(hand)] = null;
                         }
                     }
                     else
                     {
-                        if (curHandStrength == 2)
+                        if (curHandStrength == 2) //If a pair, lose the other 3
                         {
                             DeleteCards(hand, UnmatchingCards(hand, 2));
                             pa = new PlayerAction(Name, "Draw", "draw", 3);
                         }
-                        else
+                        else //Discard all but the high card
                         {
                             for (int i = 0; i < hand.Length; i++)
                             {
