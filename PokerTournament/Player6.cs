@@ -70,26 +70,24 @@ namespace PokerTournament
             //update stats
             if (actions.Count > 0) //ai goes second
             {
-                Console.WriteLine("\n*round stats-> First Player: " + actions[0].Name + " total turns taken: " + actions.Count);
+                //Console.WriteLine("\n*round stats-> First Player: " + actions[0].Name + " total turns taken: " + actions.Count);
                 for (int i = 0; i < actions.Count; i++)
                 {
-                    Console.WriteLine("   (" + (i) + "): PLR: " + actions[i].Name + ", action: " + actions[i].ActionName + ", inPhase: " + actions[i].ActionPhase + ", amount: " + actions[i].Amount);
+                    //Console.WriteLine("   (" + (i) + "): PLR: " + actions[i].Name + ", action: " + actions[i].ActionName + ", inPhase: " + actions[i].ActionPhase + ", amount: " + actions[i].Amount);
                 }
             }
             else //ai goes first
             {
-                Console.WriteLine("\n*round stats-> player 1: " + Name + " takes first turn of round.");
+                //Console.WriteLine("\n*round stats-> player 1: " + Name + " takes first turn of round.");
             }
 
             //setup action
-            //Actions action = Actions.BET;
             PlayerAction pa = null;
-            //int amount = 20;
 
             //start turn
-            Console.WriteLine("\n-> in ai betting round 1");
-            Console.WriteLine("   Total games played: "+roundNum);
-            //ListTheHand(hand);
+            //Console.WriteLine("\n-> in ai betting round 1");
+            //Console.WriteLine("   Total games played: "+roundNum);
+            ListTheHand(hand);
 
             //if ai is first
             // actions available: bet, check, fold
