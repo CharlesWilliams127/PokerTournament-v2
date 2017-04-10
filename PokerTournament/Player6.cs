@@ -11,8 +11,8 @@ namespace PokerTournament
         const int ANTE = 20;
         private enum Actions { CHECK, BET, CALL, RAISE, FOLD };
         private enum TurnOrder { FIRST, SECOND};
-        
-        int enemyFirstBet;
+
+        float estimatedEnemyStrength;
         int roundNum;
         int startingMoney;
         int currentMoney;
@@ -24,7 +24,6 @@ namespace PokerTournament
 
         public Player6(int idNum, string nm, int mny) : base(idNum, nm, mny)
         {
-            enemyFirstBet = 0;
             roundNum = 0;
             startingMoney = mny;
             currentMoney = startingMoney;
@@ -199,121 +198,212 @@ namespace PokerTournament
             Console.WriteLine("-> in ai draw round");
 
             // determine how many cards to delete
-            int numCardsToDelete = 0;
-            int[] cardsToDelete;
             Card curHighCard;
             int curHandStrength = Evaluate.RateAHand(hand, out curHighCard);
+            Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {0}", curHandStrength);
             bool takeASmallRisk = false;
             bool takeABigRisk = false;
-
-            if (enemyFirstBet > 250 && enemyFirstBet < 500)
+            
+            if (estimatedEnemyStrength > 0.2f && estimatedEnemyStrength <= 0.4f)
             {
                 takeASmallRisk = true;
-            } else if (enemyFirstBet > 500)
+            } else if (estimatedEnemyStrength > 0.4f)
             {
                 takeASmallRisk = true;
                 takeABigRisk = true;
             }
 
-            switch (curHandStrength)
-            {
-                case 1:
-                    numCardsToDelete = 4;
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    break;
-                case 6:
-                    break;
-                case 7:
-                    break;
-                case 8:
-                    numCardsToDelete = 0;
-                    break;
-                case 9:
-                    numCardsToDelete = 0;
-                    break;
-                case 10:
-                    numCardsToDelete = 0;
-                    break;
-            }
-
+            
+            //Decision Tree (if statements for now)
             PlayerAction pa = null;
-            if (curHandStrength > 5)
+            List<int> deleteIndices = new List<int>();
+            if (curHandStrength >= 5)
             {
-                if (curHandStrength >= 8)
+                if (curHandStrength >= 7)
                 {
-                    pa = new PlayerAction(Name, "Draw", "stand pat", 0);
+                    if (curHandStrength == 8)
+                    {
+                        if (curHighCard.Value > 10)
+                        {
+                            Console.WriteLine("#####################1");
+                            pa = new PlayerAction(Name, "Draw", "stand pat", 0);
+                        }
+                        else
+                        {
+                            Console.WriteLine("#####################2");
+                            DeleteCards(hand, UnmatchingCards(hand, 4));
+                            pa = new PlayerAction(Name, "Draw", "draw", 1);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("#####################3");
+                        pa = new PlayerAction(Name, "Draw", "stand pat", 0);
+                    }
                 }
                 else
                 {
-
+                    if (takeABigRisk)
+                    {
+                        if (curHandStrength == 5)
+                        {
+                            if (SimilarSuitedCards(hand, out deleteIndices) == 4)
+                            {
+                                DeleteCards(hand, deleteIndices);
+                                Console.WriteLine("#####################4");
+                                pa = new PlayerAction(Name, "Draw", "draw", 1);
+                            }
+                            else
+                            {
+                                Console.WriteLine("#####################5");
+                                pa = new PlayerAction(Name, "Draw", "stand pat", 0);
+                            }
+                        }
+                        else
+                        {
+                            if (ConsecutiveCards(hand, out deleteIndices) == 4)
+                            {
+                                DeleteCards(hand, deleteIndices);
+                                Console.WriteLine("#####################6");
+                                pa = new PlayerAction(Name, "Draw", "draw", 1);
+                            }
+                            else
+                            {
+                                Console.WriteLine("#####################7");
+                                pa = new PlayerAction(Name, "Draw", "stand pat", 0);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("#####################8");
+                        pa = new PlayerAction(Name, "Draw", "stand pat", 0);
+                    }
                 }
             }
             else
             {
-
-            }
-
-            cardsToDelete = new int[numCardsToDelete];
-
-            // which cards to delete if any
-            if (numCardsToDelete > 0 && numCardsToDelete < 5)
-            {
-                for (int i = 0; i < numCardsToDelete; i++) // loop to delete cards
+                if (takeASmallRisk)
                 {
-                    Console.WriteLine("\nDelete card " + (i + 1) + ":");
-                    for (int j = 0; j < hand.Length; j++)
+                    if (curHandStrength > 2)
                     {
-                        Console.WriteLine("{0} - {1}", (j + 1), hand[j]);
-                    }
-                    // selete cards to delete
-                    int delete = 0;
-                    do
-                    {
-
-                        Console.Write("Which card to delete? (1 - 5): ");
-                        string delStr = Console.ReadLine();
-                        int.TryParse(delStr, out delete);
-
-                        // see if the entry is valid
-                        if (delete < 1 || delete > 5)
+                        if (curHandStrength == 4)
                         {
-                            Console.WriteLine("Invalid entry - enter a value between 1 and 5.");
-                            delete = 0;
-                        }
-                        else if (hand[delete - 1] == null)
-                        {
-                            Console.WriteLine("Entry was already deleted.");
-                            delete = 0;
+                            DeleteCards(hand, UnmatchingCards(hand, 3));
                         }
                         else
                         {
-                            hand[delete - 1] = null; // delete entry
-                            delete = 99; // flag to exit loop
+                            if (SimilarSuitedCards(hand, out deleteIndices) >= 3)
+                            {
+                                Console.WriteLine("#####################9");
+                                DeleteCards(hand, deleteIndices);
+                                pa = new PlayerAction(Name, "Draw", "draw", deleteIndices.Count);
+                            }
+                            else if (ConsecutiveCards(hand, out deleteIndices) >= 3)
+                            {
+                                Console.WriteLine("#####################10");
+                                DeleteCards(hand, deleteIndices);
+                                pa = new PlayerAction(Name, "Draw", "draw", deleteIndices.Count);
+                            }
+                            else
+                            {
+                                hand[OddCardOut(hand)] = null;
+                            }
                         }
-                    } while (delete == 0);
+                    }
+                    else
+                    {
+                        if (SimilarSuitedCards(hand, out deleteIndices) >= 3)
+                        {
+                            DeleteCards(hand, deleteIndices);
+                            Console.WriteLine("#####################11");
+                            pa = new PlayerAction(Name, "Draw", "draw", deleteIndices.Count);
+                        }
+                        else if (ConsecutiveCards(hand, out deleteIndices) >= 3)
+                        {
+                            DeleteCards(hand, deleteIndices);
+                            Console.WriteLine("#####################12");
+                            pa = new PlayerAction(Name, "Draw", "draw", deleteIndices.Count);
+                        }
+                        else
+                        {
+                            if (curHandStrength == 2)
+                            {
+                                DeleteCards(hand, UnmatchingCards(hand, 2));
+                                Console.WriteLine("#####################13");
+                                pa = new PlayerAction(Name, "Draw", "draw", 3);
+                            }
+                            else
+                            {
+                                for (int i = 0; i < hand.Length; i++)
+                                {
+                                    if (i != 4)
+                                    {
+                                        hand[i] = null;
+                                    }
+                                }
+                                Console.WriteLine("#####################14");
+                                pa = new PlayerAction(Name, "Draw", "draw", 4);
+                            }
+                        }
+                    }
                 }
-                // set the PlayerAction object
-                pa = new PlayerAction(Name, "Draw", "draw", numCardsToDelete);
-            }
-            else if (numCardsToDelete == 5)
-            {
-                // delete them all
-                for (int i = 0; i < hand.Length; i++)
+                else
                 {
-                    hand[i] = null;
+                    if (curHandStrength > 2)
+                    {
+                        if (curHandStrength == 4)
+                        {
+                            List<int> tempCardList = UnmatchingCards(hand, 3);
+                            int deleteIndex = 0;
+                            foreach (int i in tempCardList)
+                            {
+                                if (deleteIndex == 0)
+                                {
+                                    deleteIndex = i;
+                                }
+                                else
+                                {
+                                    if (hand[deleteIndex].Value > hand[i].Value)
+                                    {
+                                        hand[i] = null;
+                                    }
+                                    else
+                                    {
+                                        hand[deleteIndex] = null;
+                                    }
+                                }
+                            }
+                            Console.WriteLine("#####################15");
+                            pa = new PlayerAction(Name, "Draw", "draw", 1);
+                        }
+                        else
+                        {
+                            hand[OddCardOut(hand)] = null;
+                        }
+                    }
+                    else
+                    {
+                        if (curHandStrength == 2)
+                        {
+                            DeleteCards(hand, UnmatchingCards(hand, 2));
+                            Console.WriteLine("#####################16");
+                            pa = new PlayerAction(Name, "Draw", "draw", 3);
+                        }
+                        else
+                        {
+                            for (int i = 0; i < hand.Length; i++)
+                            {
+                                if (i != 4)
+                                {
+                                    hand[i] = null;
+                                }
+                            }
+                            Console.WriteLine("#####################17");
+                            pa = new PlayerAction(Name, "Draw", "draw", 4);
+                        }
+                    }
                 }
-                pa = new PlayerAction(Name, "Draw", "draw", 5);
-            }
-            else // no cards deleted
-            {
-                pa = new PlayerAction(Name, "Draw", "stand pat", 0);
             }
 
             // return the action
@@ -535,6 +625,146 @@ namespace PokerTournament
             // otherwise return false
             return false;
         }
+
+        private int SimilarSuitedCards(Card[] hand, out List<int> cardIndices)
+        {
+            int suitCount = 0;
+            List<int> retCardIndices = new List<int>();
+            for (int j = 0; j < hand.Length; j++)
+            {
+                int tempSuitCount = 0;
+                List<int> tempRetCardIndeces = new List<int>();
+                for (int i = 0; i < hand.Length; i++)
+                {
+                    if (hand[i].Suit == hand[j].Suit)
+                    {
+                        tempSuitCount++;
+                    }
+                    else
+                    {
+                        tempRetCardIndeces.Add(i);
+                    }
+                }
+                if (tempSuitCount > suitCount)
+                {
+                    suitCount = tempSuitCount;
+                    retCardIndices = tempRetCardIndeces;
+                }
+            }
+            cardIndices = retCardIndices;
+            return suitCount;
+        }
+
+        private int ConsecutiveCards(Card[] hand, out List<int> cardIndices)
+        {
+            int consecutiveCount = 0;
+            List<int> retCardIndices = new List<int>();
+            
+            if (hand[0].Value == hand[1].Value - 1 &&
+               hand[0].Value == hand[2].Value - 2 &&
+               hand[0].Value == hand[3].Value - 3)
+            {
+                consecutiveCount = 4;
+                retCardIndices.Add(4);
+            }
+            else if (hand[1].Value == hand[2].Value - 1 &&
+                    hand[1].Value == hand[3].Value - 2 &&
+                    hand[1].Value == hand[4].Value - 3)
+            {
+                consecutiveCount = 4;
+                retCardIndices.Add(0);
+            }
+            else if (hand[0].Value == hand[1].Value - 1 &&
+                    hand[0].Value == hand[2].Value - 2 )
+            {
+                consecutiveCount = 3;
+                retCardIndices.Add(3);
+                retCardIndices.Add(4);
+            }
+            else if (hand[1].Value == hand[2].Value - 1 &&
+                    hand[1].Value == hand[3].Value - 2)
+            {
+                consecutiveCount = 3;
+                retCardIndices.Add(0);
+                retCardIndices.Add(4);
+            }
+            else if (hand[2].Value == hand[3].Value - 1 &&
+                    hand[2].Value == hand[4].Value - 2)
+            {
+                consecutiveCount = 3;
+                retCardIndices.Add(0);
+                retCardIndices.Add(1);
+            }
+            else
+            {
+                //We don't care if there's less than 3 consecutive, might as well be none (return that)
+            }
+
+            cardIndices = retCardIndices;
+            return consecutiveCount;
+        }
+
+        private List<int> UnmatchingCards(Card[] hand, int numMatchingCards)
+        {
+            List<int> retCardIndices = new List<int>();
+            for (int i = 2; i < 15; i++)
+            {
+                if (Evaluate.ValueCount(i, hand) == numMatchingCards)
+                {
+                    for (int j = 0; j < hand.Length; j++)
+                    {
+                        if (hand[j].Value != i)
+                        {
+                            retCardIndices.Add(j);
+                        }
+                    }
+                }
+            }
+
+            return retCardIndices;
+        }
+
+        private void DeleteCards(Card[] hand, List<int> cardIndices)
+        {
+            foreach (int i in cardIndices)
+            {
+                hand[i] = null;
+            }
+        }
+
+        private int OddCardOut(Card[] hand)
+        {
+            int retCard = 0;
+
+            int firstPair = 0;
+            int secondPair = 0;
+            for (int i = 2; i < 15; i++)
+            {
+                if (Evaluate.ValueCount(i, hand) == 2)
+                {
+                    if (firstPair == 0)
+                    {
+                        firstPair = i;
+                    }
+                    else
+                    {
+                        secondPair = i;
+                    }
+                }
+            }
+
+            for (int i = 0; i < hand.Length; i++)
+            {
+                if (hand[i].Value != firstPair && hand[i].Value != secondPair)
+                {
+                    retCard = i;
+                }
+            }
+
+            return retCard;
+        }
+
+
 
         // helper method - list the hand
         // temporarily copied into here so we can see what the AI has
