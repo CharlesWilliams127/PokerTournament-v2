@@ -85,7 +85,7 @@ namespace PokerTournament
             //start turn
             //Console.WriteLine("\n-> in ai betting round 1");
             //Console.WriteLine("   Total games played: "+roundNum);
-            ListTheHand(hand);
+            //ListTheHand(hand);
 
             //if ai is first
             // actions available: bet, check, fold
@@ -536,6 +536,7 @@ namespace PokerTournament
             if (roundNum <= 0)
             {
                 //currentMoney -= ANTE;
+                raiseCounter = 0;
                 action = Round1ActionSelector(TurnOrder.FIRST, null, handStrength, highCard);
                 return true;
             }
@@ -564,7 +565,7 @@ namespace PokerTournament
                     if (Round1Bet(handStrength, out bettingAmount, highCard))
                     {
                         currentAction = Actions.BET;
-                        currentMoney -= bettingAmount;
+                        //currentMoney -= bettingAmount;
                         lastActionAmount = bettingAmount;
                         return new PlayerAction(Name, "Bet1", "bet", bettingAmount);
                     }
@@ -691,7 +692,7 @@ namespace PokerTournament
                         else
                             callAmount = 0;
 
-                        currentMoney -= callAmount;
+                        //currentMoney -= callAmount;
                         return true;
                     }
 
@@ -721,7 +722,7 @@ namespace PokerTournament
                 else
                     raiseAmount = currentMoney;
 
-                currentMoney -= raiseAmount + prevAction.Amount;
+                //currentMoney -= raiseAmount + prevAction.Amount;
                 raiseCounter++;
                 return true;
             }
