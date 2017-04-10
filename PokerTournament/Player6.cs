@@ -275,7 +275,6 @@ namespace PokerTournament
             // determine how many cards to delete
             Card curHighCard;
             int curHandStrength = Evaluate.RateAHand(hand, out curHighCard);
-            Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ {0} | {1}", curHandStrength, estimatedEnemyHand);
             bool takeASmallRisk = false;
             bool takeABigRisk = false;
             
@@ -292,77 +291,69 @@ namespace PokerTournament
             //Decision Tree (if statements for now)
             PlayerAction pa = null;
             List<int> deleteIndices = new List<int>();
-            if (curHandStrength >= 5)
+            if (curHandStrength >= 5)   //Do we have a strong hand?
             {
-                if (curHandStrength >= 7)
+                if (curHandStrength >= 7) //Is it almost unbeatable?
                 {
-                    if (curHandStrength == 8)
+                    if (curHandStrength == 8) //Is it a 4 of a kind?
                     {
-                        if (curHighCard.Value > 10)
+                        if (curHighCard.Value > 10) //Get rid of a low high card
                         {
-                            Console.WriteLine("#####################1");
                             pa = new PlayerAction(Name, "Draw", "stand pat", 0);
                         }
                         else
                         {
-                            Console.WriteLine("#####################2");
                             DeleteCards(hand, UnmatchingCards(hand, 4));
                             pa = new PlayerAction(Name, "Draw", "draw", 1);
                         }
                     }
-                    else
+                    else //Nothing to get rid of that wouldn't ruin the hand
                     {
-                        Console.WriteLine("#####################3");
                         pa = new PlayerAction(Name, "Draw", "stand pat", 0);
                     }
                 }
                 else
                 {
-                    if (takeABigRisk)
+                    if (takeABigRisk) //Do we need to take a risk?
                     {
-                        if (curHandStrength == 5)
+                        if (curHandStrength == 5) //Is it a straight?
                         {
-                            if (SimilarSuitedCards(hand, out deleteIndices) == 4)
+                            if (SimilarSuitedCards(hand, out deleteIndices) == 4) //Is it almost a flush?
                             {
                                 DeleteCards(hand, deleteIndices);
-                                Console.WriteLine("#####################4");
                                 pa = new PlayerAction(Name, "Draw", "draw", 1);
                             }
                             else
                             {
-                                Console.WriteLine("#####################5");
                                 pa = new PlayerAction(Name, "Draw", "stand pat", 0);
                             }
                         }
                         else
                         {
-                            if (ConsecutiveCards(hand, out deleteIndices) == 4)
+                            if (ConsecutiveCards(hand, out deleteIndices) == 4) //Is it almost a straight flush?
                             {
                                 DeleteCards(hand, deleteIndices);
-                                Console.WriteLine("#####################6");
                                 pa = new PlayerAction(Name, "Draw", "draw", 1);
                             }
                             else
                             {
-                                Console.WriteLine("#####################7");
                                 pa = new PlayerAction(Name, "Draw", "stand pat", 0);
                             }
                         }
                     }
                     else
                     {
-                        Console.WriteLine("#####################8");
                         pa = new PlayerAction(Name, "Draw", "stand pat", 0);
                     }
                 }
             }
             else
             {
-                if (takeASmallRisk)
+                if (takeASmallRisk) //Do we need to take a risk?
                 {
-                    if (curHandStrength > 2)
+                    if (curHandStrength > 2) //Is it a medium strength hand?
                     {
-                        if (curHandStrength == 4)
+                        if (curHandStrength == 4) //Is it a 3 of a kind?
                         {
                             DeleteCards(hand, UnmatchingCards(hand, 3));
                         }
@@ -370,13 +361,11 @@ namespace PokerTournament
                         {
                             if (SimilarSuitedCards(hand, out deleteIndices) >= 3)
                             {
-                                Console.WriteLine("#####################9");
                                 DeleteCards(hand, deleteIndices);
                                 pa = new PlayerAction(Name, "Draw", "draw", deleteIndices.Count);
                             }
                             else if (ConsecutiveCards(hand, out deleteIndices) >= 3)
                             {
-                                Console.WriteLine("#####################10");
                                 DeleteCards(hand, deleteIndices);
                                 pa = new PlayerAction(Name, "Draw", "draw", deleteIndices.Count);
                             }
@@ -391,13 +380,11 @@ namespace PokerTournament
                         if (SimilarSuitedCards(hand, out deleteIndices) >= 3)
                         {
                             DeleteCards(hand, deleteIndices);
-                            Console.WriteLine("#####################11");
                             pa = new PlayerAction(Name, "Draw", "draw", deleteIndices.Count);
                         }
                         else if (ConsecutiveCards(hand, out deleteIndices) >= 3)
                         {
                             DeleteCards(hand, deleteIndices);
-                            Console.WriteLine("#####################12");
                             pa = new PlayerAction(Name, "Draw", "draw", deleteIndices.Count);
                         }
                         else
@@ -405,7 +392,6 @@ namespace PokerTournament
                             if (curHandStrength == 2)
                             {
                                 DeleteCards(hand, UnmatchingCards(hand, 2));
-                                Console.WriteLine("#####################13");
                                 pa = new PlayerAction(Name, "Draw", "draw", 3);
                             }
                             else
@@ -417,7 +403,6 @@ namespace PokerTournament
                                         hand[i] = null;
                                     }
                                 }
-                                Console.WriteLine("#####################14");
                                 pa = new PlayerAction(Name, "Draw", "draw", 4);
                             }
                         }
@@ -449,7 +434,6 @@ namespace PokerTournament
                                     }
                                 }
                             }
-                            Console.WriteLine("#####################15");
                             pa = new PlayerAction(Name, "Draw", "draw", 1);
                         }
                         else
@@ -462,7 +446,6 @@ namespace PokerTournament
                         if (curHandStrength == 2)
                         {
                             DeleteCards(hand, UnmatchingCards(hand, 2));
-                            Console.WriteLine("#####################16");
                             pa = new PlayerAction(Name, "Draw", "draw", 3);
                         }
                         else
@@ -474,7 +457,6 @@ namespace PokerTournament
                                     hand[i] = null;
                                 }
                             }
-                            Console.WriteLine("#####################17");
                             pa = new PlayerAction(Name, "Draw", "draw", 4);
                         }
                     }
@@ -798,7 +780,8 @@ namespace PokerTournament
             // otherwise return false
             return false;
         }
-        
+
+        //Get number of cards in the largest represented suit, and cards not part of that suit
         private int SimilarSuitedCards(Card[] hand, out List<int> cardIndices)
         {
             int suitCount = 0;
@@ -818,6 +801,7 @@ namespace PokerTournament
                         tempRetCardIndeces.Add(i);
                     }
                 }
+                //If there's more of this suit, overwrite the other
                 if (tempSuitCount > suitCount)
                 {
                     suitCount = tempSuitCount;
@@ -828,6 +812,7 @@ namespace PokerTournament
             return suitCount;
         }
 
+        //Get number of cards in order, and cards not part of that order
         private int ConsecutiveCards(Card[] hand, out List<int> cardIndices)
         {
             int consecutiveCount = 0;
@@ -877,11 +862,13 @@ namespace PokerTournament
             return consecutiveCount;
         }
 
+        //Get all cards that aren't part of a matching group
         private List<int> UnmatchingCards(Card[] hand, int numMatchingCards)
         {
             List<int> retCardIndices = new List<int>();
             for (int i = 2; i < 15; i++)
             {
+                //Go until we find the designated group
                 if (Evaluate.ValueCount(i, hand) == numMatchingCards)
                 {
                     for (int j = 0; j < hand.Length; j++)
@@ -897,6 +884,7 @@ namespace PokerTournament
             return retCardIndices;
         }
 
+        //Delete list of card indices
         private void DeleteCards(Card[] hand, List<int> cardIndices)
         {
             foreach (int i in cardIndices)
@@ -905,10 +893,12 @@ namespace PokerTournament
             }
         }
 
+        //Get the odd card out of a two pair
         private int OddCardOut(Card[] hand)
         {
             int retCard = 0;
 
+            //Get both pairs
             int firstPair = 0;
             int secondPair = 0;
             for (int i = 2; i < 15; i++)
@@ -926,6 +916,7 @@ namespace PokerTournament
                 }
             }
 
+            //Find the 5th card
             for (int i = 0; i < hand.Length; i++)
             {
                 if (hand[i].Value != firstPair && hand[i].Value != secondPair)
