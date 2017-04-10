@@ -13,9 +13,9 @@ namespace PokerTournament
         private enum Actions { CHECK, BET, CALL, RAISE, FOLD };
         private enum TurnOrder { FIRST, SECOND};
 
-        // risk is a value from 0 - 3
+        // risk is a value from -.09 - 0.9
         // risk is calcuted by weighing the projected enemy hand against our own
-        int risk;
+        float risk = 0.0f;
 
         // this value represents the hand we believe our opponent to have
         // the scale is from 0.0 - 1.0
@@ -30,8 +30,6 @@ namespace PokerTournament
         int lastActionStr;
         int lastActionAmount;
         Actions currentAction;
-        int amountToBet;
-        int bluffChance;
 
         public Player6(int idNum, string nm, int mny) : base(idNum, nm, mny)
         {
@@ -48,17 +46,16 @@ namespace PokerTournament
         {
             // create a test hand to test reactions
             Card[] testHand = new Card[5];
-            testHand[0] = new Card("Spades", 2);
-            testHand[1] = new Card("Diamonds", 2);
-            testHand[2] = new Card("Clubs", 7);
-            testHand[3] = new Card("Spades", 5);
-            testHand[4] = new Card("Hearts", 12);
+            testHand[0] = new Card("Spades", 14);
+            testHand[1] = new Card("Diamonds", 14);
+            testHand[2] = new Card("Clubs", 14);
+            testHand[3] = new Card("Spades", 13);
+            testHand[4] = new Card("Hearts", 13);
 
             int test = (int)(((float)rng.Next(33, 100) / 0.01) * 100);
             //Console.Writ
 
             //info to keep track of
-            bool isFirst = false;
             roundNum = actions.Count;
             
             // evaluate the hand
@@ -77,7 +74,6 @@ namespace PokerTournament
             else //ai goes first
             {
                 Console.WriteLine("\n*round stats-> player 1: " + Name + " takes first turn of round.");
-                isFirst = true;
             }
 
             //setup action
@@ -105,86 +101,8 @@ namespace PokerTournament
                 Console.WriteLine("Estimated enemy hand strength: " + estimatedEnemyHand);
  
                 pa = Round1ActionSelector(TurnOrder.SECOND, actions[roundNum - 1], handStrength, highCard);
-                //int aas = roundNum - 1;
-                //Console.WriteLine("roundNum - 1 = " + aas + " roundNum = " + actions.Count);
-                //pa = new PlayerAction(Name, "Bet1", "fold", 0);
                 return pa;
             }
-                //int riskTaking= 0; //low=take no risk -- high=take much risk
-                                              //probably replace with calculated value based on overall game
-                //int risk = 0;
-                //amount = 0;
-                //int act = 0;
-
-                //check hand strength
-                //switch (handStrength)
-                //{
-                //    case 1: //fold, check or evaluate risk
-                //        riskTaking = rng.Next(4); //low=take no risk -- high=take much risk
-                //
-                //        switch (riskTaking)
-                //        {
-                //            case 0: action = Actions.FOLD;
-                //                Console.WriteLine("AI plays it safe and folds");
-                //                break;
-                //            case 1: action = Actions.FOLD;
-                //                Console.WriteLine("AI plays it safe and folds");
-                //                break;
-                //            case 2:
-                //                act = rng.Next(3); //2/3 chance of folding
-                //                if (act == 0) action = Actions.FOLD;
-                //                else if (act == 1) action = Actions.FOLD;
-                //                else if (act == 2) action = Actions.CHECK;
-                //                Console.WriteLine("AI is considering taking a risk");
-                //                break;
-                //            case 3: action = Actions.BET;
-                //                amount = 10; //<- replace with calc bet amount
-                //                Console.WriteLine("AI is taking a risk");
-                //                break;
-                //        }
-                //        break;
-                //    case 2: //fold, check or evaluate risk
-                //        break;
-                //    case 3: //fold, check or evaluate risk
-                //        break;
-                //    case 4: //check or evaluate risk
-                //        break;
-                //    case 5: //check or evaluate risk
-                //        break;
-                //    case 6: //check or evaluate risk
-                //        break;
-                //    case 7: //check or evaluate risk
-                //        break;
-                //    case 8: action = Actions.BET;
-                //            //calculate bet amount
-                //        break;
-                //    case 9: action = Actions.BET;
-                //        //calculate bet amount
-                //        break;
-                //    case 10: action = Actions.BET;
-                //        //calculate bet amount
-                //        break;
-                //}
-            //}
-            //else
-            //{
-            //
-            //}
-
-
-
-            //end turn and submit action
-            //create the PlayerAction
-            //switch (action)
-            //{
-            //    case Actions.BET: pa = new PlayerAction(Name, "Bet1", "bet", amount); break;
-            //    case Actions.RAISE: pa = new PlayerAction(Name, "Bet1", "raise", amount); break;
-            //    case Actions.CALL: pa = new PlayerAction(Name, "Bet1", "call", amount); break;
-            //    case Actions.CHECK: pa = new PlayerAction(Name, "Bet1", "check", amount); break;
-            //    case Actions.FOLD: pa = new PlayerAction(Name, "Bet1", "fold", amount); break;
-            //    default: Console.WriteLine("Invalid menu selection - try again"); break;
-            //} Console.WriteLine("< end ai betting round 1 >");
-            //return pa;
         }
 
         public override PlayerAction BettingRound2(List<PlayerAction> actions, Card[] hand)
@@ -350,6 +268,7 @@ namespace PokerTournament
                 // if the enemy suddenly jumps at a certain point, assume they are trying to trick us
                 if (i > 1 && enemyActions[i].Amount - enemyActions[i - 1].Amount > 200)
                 {
+                    risk -= (float)rng.NextDouble() * (-.1f);
                     estimatedValue += 0.2f;
                 }
             }
@@ -360,18 +279,22 @@ namespace PokerTournament
 
                 if (averageBet > 20 && averageBet < 50)
                 {
+                    risk += (float)rng.NextDouble() * (.1f);
                     estimatedValue+= 0.2f;
                 }
                 if (averageBet > 49 && averageBet < 100)
                 {
+                    risk = 0.0f;
                     estimatedValue+= 0.3f;
                 }
                 if (averageBet > 99 && averageBet < 200)
                 {
-                    estimatedValue+= 0.4f;
+                    risk -= (float)rng.NextDouble() * (-.2f);
+                    estimatedValue += 0.4f;
                 }
                 if (averageBet > 199 && averageBet < 1000)
                 {
+                    risk -= (float)rng.NextDouble() * (-.4f);
                     estimatedValue += 0.9f;
                 }
             }
@@ -480,7 +403,6 @@ namespace PokerTournament
             // assume value bet, that is, make the highest bet we think the opponent will call
             // first, let's calculate our highest bet we're willing to do, we don't want to scare them off by going all in
             int highestWillingBet = currentMoney / 4;
-            //int randomBettingVal = (int)(((float)rng.Next(33, 100) / 0.01) * highestWillingBet);
 
 
             if (handStrength == 1 && highCard.Value > 12)
@@ -537,15 +459,15 @@ namespace PokerTournament
             if (prevAction.ActionName == "bet" || prevAction.ActionName == "raise")
             {
                 Console.WriteLine("Difference Between Hands: " + diffHands);
-                if (prevAction.Amount <= highestWillingBet && diffHands >= -0.2)
+                if (prevAction.Amount <= highestWillingBet && diffHands >= (-0.2 + risk))
                 {
                     //int amountToBet = handStrength * 25;
                     if (handStrength >= 1)
                     {
                         if (prevAction.Amount < currentMoney)
-                            callAmount = prevAction.Amount;
+                            callAmount = 0;
                         else
-                            callAmount = currentMoney;
+                            callAmount = 0;
 
                         currentMoney -= callAmount;
                         return true;
@@ -583,12 +505,12 @@ namespace PokerTournament
             if (prevAction.ActionName == "bet" || prevAction.ActionName == "raise")
             {
 
-                if (diffHands >= 0.1 && highCard.Value > rng.Next(9, 11))
+                if (diffHands >= (0.1 + risk) && highCard.Value > rng.Next(9, 11))
                 {
                     if (handStrength > 1)
                     {
                         if (tempRaiseAmount / 2 < currentMoney)
-                            raiseAmount = rng.Next(tempRaiseAmount / 4, tempRaiseAmount / 2);
+                            raiseAmount = rng.Next(tempRaiseAmount / 4, tempRaiseAmount / 2) + (int)(risk * 10);
                         else
                             raiseAmount = currentMoney;
 
