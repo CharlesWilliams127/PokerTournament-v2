@@ -355,6 +355,7 @@ namespace PokerTournament
                         if (curHandStrength == 4) //Is it a 3 of a kind?
                         {
                             DeleteCards(hand, UnmatchingCards(hand, 3));
+                            pa = new PlayerAction(Name, "Draw", "stand pat", 2);
                         }
                         else
                         {
@@ -371,6 +372,7 @@ namespace PokerTournament
                             else // Ditch the 5th card
                             {
                                 hand[OddCardOut(hand)] = null;
+                                pa = new PlayerAction(Name, "Draw", "stand pat", 1);
                             }
                         }
                     }
@@ -439,6 +441,7 @@ namespace PokerTournament
                         else //If a two pair, ditch the 5th card
                         {
                             hand[OddCardOut(hand)] = null;
+                            pa = new PlayerAction(Name, "Draw", "stand pat", 1);
                         }
                     }
                     else
@@ -462,7 +465,7 @@ namespace PokerTournament
                     }
                 }
             }
-
+            
             // return the action
             return pa;
         }
